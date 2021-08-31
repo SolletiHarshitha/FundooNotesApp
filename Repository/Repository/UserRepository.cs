@@ -116,7 +116,7 @@ namespace Repository.Repository
             }
             Message message = new Message();
             message.Formatter = new BinaryMessageFormatter();
-            message.Body = "Click on the following  link to reset your password for FundooNotes App";
+            message.Body = "Click on the following  link to reset your password for FundooNotes App : https://localhost:44322/api/ResetPassword";
             sender.Label = "url link";
             sender.Send(message);
         }
@@ -127,6 +127,26 @@ namespace Repository.Repository
             receive.Formatter = new BinaryMessageFormatter();
             string linkToSend = receive.Body.ToString();
             return linkToSend;
+        }
+
+        public bool ResetPassword(ResetPasswordModel resetData)
+        {
+            try
+            {
+                string encodedPassword = EncryptPassword(resetData.NewPassword);
+                var user = this.userContext.Users.Where(x => x.Email == resetData.Email).FirstOrDefault();
+                if(user != null)
+                {
+                    user.Password = encodedPassword;
+                    userContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch(ArgumentNullException ex)
+            {
+                throw new ArgumentNullException(ex.Message);
+            }
         }
     }
 }

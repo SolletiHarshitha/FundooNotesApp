@@ -82,6 +82,28 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        [HttpPut]
+        [Route("api/ResetPassword")]
+        public IActionResult ResetPassword([FromBody]ResetPasswordModel resetData)
+        {
+            try 
+            {
+                bool result = this.manager.ResetPassword(resetData);
+                if (result == true)
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Reset Password Successful!" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Reset Password is Unsuccessful.Email is Incorrect" });
+                }
+            }
+            catch(Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }
 
