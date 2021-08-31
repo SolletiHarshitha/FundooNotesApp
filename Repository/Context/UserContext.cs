@@ -14,7 +14,5 @@ namespace Repository.Context
         }
 
         public DbSet<RegisterModel> Users { get; set; }
-
-        //public DbSet<LoginModel> User { get; set; }
     }
 }

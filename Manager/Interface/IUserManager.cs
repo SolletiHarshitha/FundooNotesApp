@@ -9,5 +9,6 @@ namespace Manager.Interface
     {
         bool Register(RegisterModel userData);
         bool Login(LoginModel loginData);
+        bool ForgotPassword(string email);
     }
 }
