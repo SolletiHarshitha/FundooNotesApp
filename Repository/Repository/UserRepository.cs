@@ -128,24 +128,5 @@ namespace Repository.Repository
             string linkToSend = receive.Body.ToString();
             return linkToSend;
         }
-
-        /*public bool Mail(string email, string message)
-        {
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("solletiharshitha@gmail.com");
-            mailMessage.To.Add(new MailAddress(email));
-            mailMessage.Subject = "Link to reset password";
-            mailMessage.Body = message;
-            mailMessage.IsBodyHtml = true;
-
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-            smtp.Port = 587;
-            smtp.EnableSsl = true;
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("solletiharshitha@gmail.com", "Password");
-            
-            smtp.Send(mailMessage);
-            return true;
-        }*/
     }
 }
