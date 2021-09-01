@@ -8,15 +8,19 @@
 namespace Repository.Repository
 {
     using System;
+    using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Net;
     using System.Net.Mail;
+    using System.Security.Claims;
     using System.Text;
     using Experimental.System.Messaging;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.IdentityModel.Tokens;
     using Models;
     using global::Repository.Context;
     using global::Repository.Interface;
-    
+
     /// <summary>
     /// User Repository Class
     /// </summary>
@@ -28,12 +32,19 @@ namespace Repository.Repository
         private readonly UserContext userContext;
 
         /// <summary>
+        /// IConfiguration configuration
+        /// </summary>
+        private readonly IConfiguration config;
+
+        /// <summary>
         /// Initializes a new instance of the UserRepository class
         /// </summary>
-        /// <param name="userContext"> UserContext userContext</param>
-        public UserRepository(UserContext userContext)
+        /// <param name="userContext">UserContext userContext</param>
+        /// <param name="configuration">IConfiguration configuration</param>
+        public UserRepository(UserContext userContext, IConfiguration configuration)
         {
             this.userContext = userContext;
+            this.config = configuration;
         }
 
         /// <summary>
@@ -41,19 +52,25 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="userData">Details required for Registration</param>
         /// <returns>Result of the action</returns>
-        public bool Register(RegisterModel userData)
+        public string Register(RegisterModel userData)
         {
             try
             {
-                if (userData != null)
+                var newUser = this.userContext.Users.Where(x => x.Email == userData.Email);
+                if (newUser == null)
                 {
-                    userData.Password = this.EncryptPassword(userData.Password);
-                    this.userContext.Users.Add(userData);
-                    this.userContext.SaveChanges();
-                    return true;
+                    if (userData != null)
+                    {
+                        userData.Password = this.EncryptPassword(userData.Password);
+                        this.userContext.Users.Add(userData);
+                        this.userContext.SaveChanges();
+                        return "Registration Successful";
+                    }
+
+                    return "Registration Unsuccessful";
                 }
 
-                return false;
+                return "The given Email already exists";
             }
             catch (ArgumentNullException ex)
             {
@@ -220,6 +237,25 @@ namespace Repository.Repository
                 throw new ArgumentNullException(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Token Generation
+        /// </summary>
+        /// <param name="email">Required Email</param>
+        /// <returns>Generates token</returns>
+        public string GenerateToken(string email)
+        {
+            byte[] key = Convert.FromBase64String(this.config["SecretKey"]);
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
+            SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, email) }),
+                Expires = DateTime.UtcNow.AddMinutes(30),
+                SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
+            };
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            JwtSecurityToken token = handler.CreateJwtSecurityToken(descriptor);
+            return handler.WriteToken(token);
+        }
     }
 }
-

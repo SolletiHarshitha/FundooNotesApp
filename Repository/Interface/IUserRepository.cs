@@ -19,7 +19,7 @@ namespace Repository.Interface
         /// </summary>
         /// <param name="userData">User Details for Registration</param>
         /// <returns>Returns the Result</returns>
-        bool Register(RegisterModel userData);
+        string Register(RegisterModel userData);
 
         /// <summary>
         /// Login Method
@@ -41,5 +41,12 @@ namespace Repository.Interface
         /// <param name="resetData">UserDetails to Reset Password</param>
         /// <returns>Returns the Result</returns>
         bool ResetPassword(ResetPasswordModel resetData);
+
+        /// <summary>
+        /// Generates token
+        /// </summary>
+        /// <param name="email">Email Id</param>
+        /// <returns>Token as  string</returns>
+        string GenerateToken(string email);
     }
 }

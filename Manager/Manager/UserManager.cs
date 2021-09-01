@@ -36,7 +36,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="userData">Details required for Registration</param>
         /// <returns>Result of the action</returns>
-        public bool Register(RegisterModel userData)
+        public string Register(RegisterModel userData)
         {
             try
             {
@@ -92,6 +92,23 @@ namespace Manager.Manager
             try
             {
                 return this.repository.ResetPassword(resetData);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Method to Generate token
+        /// </summary>
+        /// <param name="email">Email Id</param>
+        /// <returns>Resultant token</returns>
+        public string GenerateToken(string email)
+        {
+            try
+            {
+                return this.repository.GenerateToken(email);
             }
             catch (Exception ex)
             {

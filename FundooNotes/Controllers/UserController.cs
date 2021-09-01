@@ -42,14 +42,15 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                bool result = this.manager.Register(userData);
-                if (result == true)
+                string expectedResult = "Registration Successful";
+                string actualResult = this.manager.Register(userData);
+                if (expectedResult.Equals(actualResult))
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "New User Added Successfull" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "New User Added Successful", Data = actualResult });
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "User Added Unsuccessful" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Registration Unsuccessful", Data = actualResult });
                 }
             }
             catch (Exception ex)
@@ -70,9 +71,10 @@ namespace FundooNotes.Controllers
             try 
             {
                 bool result = this.manager.Login(loginData);
+                string resultMessage = this.manager.GenerateToken(loginData.Email);
                 if (result == true)
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Login Successfull" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Login Successfull", Data = resultMessage });
                 }
                 else
                 {
