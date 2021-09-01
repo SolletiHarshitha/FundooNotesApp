@@ -134,7 +134,7 @@ namespace Repository.Repository
             smtp.Port = 587;
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("soll17311.cs@rmkec.ac.in", "harshi@bujji");
+            smtp.Credentials = new System.Net.NetworkCredential("soll17311.cs@rmkec.ac.in", "password");
 
             smtp.Send(mailMessage);
             return true;
