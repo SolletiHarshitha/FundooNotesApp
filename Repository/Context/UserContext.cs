@@ -27,5 +27,10 @@ namespace Repository.Context
         /// Gets or sets the users table
         /// </summary>
         public DbSet<RegisterModel> Users { get; set; }
+
+        /// <summary>
+        /// Gets or sets the notes table
+        /// </summary>
+        public DbSet<NotesModel> Notes { get; set; }
     }
 }
