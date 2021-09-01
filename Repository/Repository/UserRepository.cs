@@ -9,6 +9,7 @@ namespace Repository.Repository
 {
     using System;
     using System.Linq;
+    using System.Net;
     using System.Net.Mail;
     using System.Text;
     using Experimental.System.Messaging;
@@ -188,7 +189,7 @@ namespace Repository.Repository
             smtp.Port = 587;
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("soll17311.cs@rmkec.ac.in", "Password");
+            smtp.Credentials = new NetworkCredential("soll17311.cs@rmkec.ac.in", "Password");
 
             smtp.Send(mailMessage);
             return true;
