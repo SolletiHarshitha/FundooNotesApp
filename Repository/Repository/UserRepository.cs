@@ -1,4 +1,4 @@
-﻿// ----------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------
 // <copyright file="UserRepository.cs" company="Bridgelabz"> 
 // Copyright © 2021 Company="BridgeLabz" 
 // </copyright> 
@@ -133,7 +133,7 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
-
+        
         /// <summary>
         /// Method to Send Message into Queue
         /// </summary>
@@ -168,14 +168,14 @@ namespace Repository.Repository
             string link = receive.Body.ToString();
             return link;
         }
-
+        
         /// <summary>
         /// Mail Method to send email
         /// </summary>
         /// <param name="email">Email to send</param>
         /// <param name="message">Message from the receive queue</param>
         /// <returns>Resultant value</returns>
-        public bool Mail(string email, string message) 
+        public bool Mail(string email, string message)
         {
             MailMessage mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("soll17311.cs@rmkec.ac.in");
@@ -188,7 +188,7 @@ namespace Repository.Repository
             smtp.Port = 587;
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("soll17311.cs@rmkec.ac.in", "Password");
+            smtp.Credentials = new System.Net.NetworkCredential("soll17311.cs@rmkec.ac.in", "password");
 
             smtp.Send(mailMessage);
             return true;
@@ -221,3 +221,4 @@ namespace Repository.Repository
         }
     }
 }
+
