@@ -7,9 +7,9 @@ namespace Repository.Interface
 {
     public interface IUserRepository
     {
-        public bool Register(RegisterModel userData);
-        public bool Login(LoginModel loginData);
-        public bool ForgotPassword(string email);
-        public bool ResetPassword(ResetPasswordModel resetData);
+        bool Register(RegisterModel userData);
+        bool Login(LoginModel loginData);
+        bool ForgotPassword(string email);
+        bool ResetPassword(ResetPasswordModel resetData);
     }
 }
