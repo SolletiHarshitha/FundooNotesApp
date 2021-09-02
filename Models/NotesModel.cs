@@ -7,6 +7,7 @@
 
 namespace Models
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -60,16 +61,19 @@ namespace Models
         /// <summary>
         /// Gets or sets a value indicating whether to archive a note or not
         /// </summary>
+        [DefaultValue(false)]
         public bool Archive { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the note should pin or unpin
         /// </summary>
+        [DefaultValue(false)]
         public bool Pin { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the note should delete or not
         /// </summary>
+        [DefaultValue(false)]
         public bool Trash { get; set; }
     }
 }
