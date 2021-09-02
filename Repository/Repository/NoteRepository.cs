@@ -104,5 +104,30 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Delete Note Forever API
+        /// </summary>
+        /// <param name="id">Delete Note</param>
+        /// <returns>Returns the delete status</returns>
+        public string DeleteNoteForever(int id)
+        {
+            try
+            {
+                var note = this.userContext.Notes.Find(id);
+                if (note != null)
+                {
+                    this.userContext.Notes.Remove(note);
+                    this.userContext.SaveChanges();
+                    return "Successful";
+                }
+
+                return "Unsuccessful";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

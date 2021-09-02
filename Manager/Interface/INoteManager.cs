@@ -34,5 +34,12 @@ namespace Manager.Interface
         /// <param name="id">To Delete Note</param>
         /// <returns>Result of the action</returns>
         string DeleteNoteMoveToTrash(int id);
+
+        /// <summary>
+        /// Delete Note Interface
+        /// </summary>
+        /// <param name="id">To Delete Note</param>
+        /// <returns>Result of the action</returns>
+        string DeleteNoteForever(int id);
     }
 }
