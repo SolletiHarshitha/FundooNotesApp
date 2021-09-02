@@ -84,5 +84,20 @@ namespace Manager.Interface
         /// <param name="noteId">Note Id Parameter</param>
         /// <returns>Results of the action</returns>
         string RestoreNote(int noteId);
+
+        /// <summary>
+        /// Add Reminder Interface
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="reminder">Reminder Parameter</param>
+        /// <returns>Result of the action</returns>
+        string RemindMe(int noteId, string reminder);
+
+        /// <summary>
+        /// Delete Reminder Interface
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <returns>Result of the action</returns>
+        string DeleteReminder(int noteId);
     }
 }

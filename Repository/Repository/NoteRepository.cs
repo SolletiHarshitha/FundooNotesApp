@@ -291,5 +291,58 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Add Reminder Method
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="reminder">Reminder Parameter</param>
+        /// <returns>Returns the Reminder status</returns>
+        public string RemindMe(int noteId, string reminder)
+        {
+            try 
+            {
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    note.Remainder = reminder;
+                    this.userContext.Notes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "Successful";
+                }
+
+                return "Unsuccessful";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Delete Reminder Method
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <returns>Returns the Delete Reminder status</returns>
+        public string DeleteReminder(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    note.Remainder = null;
+                    this.userContext.Notes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "Successful";
+                }
+
+                return "Unsuccessful";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

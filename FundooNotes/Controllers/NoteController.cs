@@ -301,5 +301,61 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Remind Me API
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="reminder">Reminder Parameter</param>
+        /// <returns>result of the action</returns>
+        [HttpPut]
+        [Route("api/RemindMe")]
+        public IActionResult RemindMe(int noteId, string reminder)
+        {
+            try
+            {
+                string resultMessage = this.manager.RemindMe(noteId, reminder);
+                if (resultMessage.Equals("Successful"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note added to reminders Successfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't  added to reminders" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Remind Me API
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="reminder">Reminder Parameter</param>
+        /// <returns>result of the action</returns>
+        [HttpPut]
+        [Route("api/DeleteReminder")]
+        public IActionResult DeleteReminder(int noteId)
+        {
+            try
+            {
+                string resultMessage = this.manager.DeleteReminder(noteId);
+                if (resultMessage.Equals("Successful"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Reminder deleteted Successfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Reminder doesn't deleted" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }

@@ -130,5 +130,26 @@ namespace Manager.Manager
         {
             return this.repository.RestoreNote(noteId);
         }
+
+        /// <summary>
+        /// Add Reminder Method
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="reminder">Reminder Parameter</param>
+        /// <returns>Result of the method</returns>
+        public string RemindMe(int noteId, string reminder)
+        {
+            return this.repository.RemindMe(noteId, reminder);
+        }
+
+        /// <summary>
+        /// Delete Reminder Method
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <returns>Result of the method</returns>
+        public string DeleteReminder(int noteId)
+        {
+            return this.repository.DeleteReminder(noteId);
+        }
     }
 }
