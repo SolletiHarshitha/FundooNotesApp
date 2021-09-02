@@ -139,7 +139,7 @@ namespace Repository.Repository
         {
             try
             {
-                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId && x.Trash == false).FirstOrDefault();
                 if (note != null)
                 {
                     note.Archive = true;
@@ -166,7 +166,7 @@ namespace Repository.Repository
         {
             try
             {
-                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId && x.Trash == false).FirstOrDefault();
                 if (note != null)
                 {
                     note.Archive = false;
@@ -193,7 +193,7 @@ namespace Repository.Repository
         {
             try
             {
-                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId && x.Trash == false).FirstOrDefault();
                 if (note != null)
                 {
                     note.Pin = true;
@@ -220,7 +220,7 @@ namespace Repository.Repository
         {
             try
             {
-                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId && x.Trash == false).FirstOrDefault();
                 if (note != null)
                 {
                     note.Pin = false;
@@ -248,7 +248,7 @@ namespace Repository.Repository
         {
             try 
             {
-                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId && x.Trash == false).FirstOrDefault();
                 if (note != null)
                 {
                     note.Color = color;
