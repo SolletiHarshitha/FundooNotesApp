@@ -246,5 +246,33 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Get Color API
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="color">Color Parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpPut]
+        [Route("api/Color")]
+        public IActionResult GetColor(int noteId, string color)
+        {
+            try
+            {
+                string resultMessage = this.manager.GetColor(noteId, color);
+                if (resultMessage.Equals("Successful"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Color added Successfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Color not added successfully" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }

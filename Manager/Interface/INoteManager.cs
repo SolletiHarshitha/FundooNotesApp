@@ -69,5 +69,13 @@ namespace Manager.Interface
         /// <param name="noteId">To UnPin Note</param>
         /// <returns>Result of the action</returns>
         string UnPinNote(int noteId);
+
+        /// <summary>
+        /// Get Color Interface
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="color">Color Parameter</param>
+        /// <returns>Result of the action</returns>
+        string GetColor(int noteId, string color);
     }
 }

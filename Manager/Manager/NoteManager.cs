@@ -109,5 +109,16 @@ namespace Manager.Manager
         {
             return this.repository.UnPinNote(noteId);
         }
+
+        /// <summary>
+        /// Get color Method
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="color">Color Parameter</param>
+        /// <returns>Result of the action</returns>
+        public string GetColor(int noteId, string color)
+        {
+            return this.repository.GetColor(noteId, color);
+        }
     }
 }
