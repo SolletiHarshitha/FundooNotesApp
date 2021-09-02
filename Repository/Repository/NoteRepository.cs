@@ -265,5 +265,31 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Restore Note Method
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <returns>returns the status of the restore note</returns>
+        public string RestoreNote(int noteId)
+        {
+            try 
+            {
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    note.Trash = false;
+                    this.userContext.Notes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "Successful";
+                }
+
+                return "Unsuccessful";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

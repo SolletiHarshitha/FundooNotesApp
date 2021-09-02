@@ -120,5 +120,15 @@ namespace Manager.Manager
         {
             return this.repository.GetColor(noteId, color);
         }
+
+        /// <summary>
+        /// Restore Note Method
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <returns>Result of the action</returns>
+        public string RestoreNote(int noteId)
+        {
+            return this.repository.RestoreNote(noteId);
+        }
     }
 }

@@ -77,5 +77,12 @@ namespace Manager.Interface
         /// <param name="color">Color Parameter</param>
         /// <returns>Result of the action</returns>
         string GetColor(int noteId, string color);
+
+        /// <summary>
+        /// Restore Note Interface
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <returns>Results of the action</returns>
+        string RestoreNote(int noteId);
     }
 }
