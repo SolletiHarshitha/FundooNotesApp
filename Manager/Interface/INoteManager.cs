@@ -55,5 +55,19 @@ namespace Manager.Interface
         /// <param name="noteId">To UnArchive Note</param>
         /// <returns>Result of the action</returns>
         string UnArchiveNote(int noteId);
+
+        /// <summary>
+        /// Pin Note Interface
+        /// </summary>
+        /// <param name="noteId">Pin Note</param>
+        /// <returns>Result of the action</returns>
+        string PinNote(int noteId);
+
+        /// <summary>
+        /// UnPin Note Interface
+        /// </summary>
+        /// <param name="noteId">To UnPin Note</param>
+        /// <returns>Result of the action</returns>
+        string UnPinNote(int noteId);
     }
 }

@@ -183,5 +183,59 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Pin Note Method
+        /// </summary>
+        /// <param name="noteId">Pin Note Data</param>
+        /// <returns>Returns the pin status</returns>
+        public string PinNote(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    note.Pin = true;
+
+                    this.userContext.Notes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "Successful";
+                }
+
+                return "Unsuccessful";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// UnPin Note Method
+        /// </summary>
+        /// <param name="noteId">UnPin Note Data</param>
+        /// <returns>Returns the pin status</returns>
+        public string UnPinNote(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    note.Pin = false;
+
+                    this.userContext.Notes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "Successful";
+                }
+
+                return "Unsuccessful";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -192,5 +192,59 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// PinNote API
+        /// </summary>
+        /// <param name="noteId">Pin Note</param>
+        /// <returns>Result of the action</returns>
+        [HttpPut]
+        [Route("api/PinNote")]
+        public IActionResult PinNote(int noteId)
+        {
+            try
+            {
+                string resultMessage = this.manager.PinNote(noteId);
+                if (resultMessage.Equals("Successful"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Pin Note Successfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Pin Note unsuccessful" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// UnPin Note API
+        /// </summary>
+        /// <param name="noteId">UnPin Note</param>
+        /// <returns>result of the action</returns>
+        [HttpPut]
+        [Route("api/UnPinNote")]
+        public IActionResult UnPinNote(int noteId)
+        {
+            try
+            {
+                string resultMessage = this.manager.UnPinNote(noteId);
+                if (resultMessage.Equals("Successful"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "UnPin note Successfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "UnPin Note unsuccessful" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }

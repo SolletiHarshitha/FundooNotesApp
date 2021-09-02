@@ -89,5 +89,25 @@ namespace Manager.Manager
         {
             return this.repository.UnArchiveNote(noteId);
         }
+
+        /// <summary>
+        /// Pin Note Method
+        /// </summary>
+        /// <param name="noteId">Pin Data</param>
+        /// <returns>Result of the action</returns>
+        public string PinNote(int noteId)
+        {
+            return this.repository.PinNote(noteId);
+        }
+
+        /// <summary>
+        /// UnPin Note Method
+        /// </summary>
+        /// <param name="noteId">UnPin Data</param>
+        /// <returns>Result of the action</returns>
+        public string UnPinNote(int noteId)
+        {
+            return this.repository.UnPinNote(noteId);
+        }
     }
 }
