@@ -69,5 +69,25 @@ namespace Manager.Manager
         {
             return this.repository.DeleteNoteForever(id);
         }
+
+        /// <summary>
+        /// Archive Note Method
+        /// </summary>
+        /// <param name="noteId">Data to archive</param>
+        /// <returns>Result of the action</returns>
+        public string ArchiveNote(int noteId)
+        {
+            return this.repository.ArchiveNote(noteId);
+        }
+
+        /// <summary>
+        /// UnArchive Note Method
+        /// </summary>
+        /// <param name="noteId">Data to UnArchive</param>
+        /// <returns>Result of the action</returns>
+        public string UnArchiveNote(int noteId)
+        {
+            return this.repository.UnArchiveNote(noteId);
+        }
     }
 }

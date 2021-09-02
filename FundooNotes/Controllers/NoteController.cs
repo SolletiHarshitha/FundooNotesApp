@@ -118,7 +118,7 @@ namespace FundooNotes.Controllers
         /// <param name="noteId">Delete Note Forever</param>
         /// <returns>Result of the action</returns>
         [HttpDelete]
-        [Route("api/DeleteNote")]
+        [Route("api/DeleteForever")]
         public IActionResult DeleteNoteForever(int noteId)
         {
             try
@@ -131,6 +131,60 @@ namespace FundooNotes.Controllers
                 else
                 {
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note deleted successfully" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Archive Note API
+        /// </summary>
+        /// <param name="noteId">Archive Note</param>
+        /// <returns>Result of the action</returns>
+        [HttpPut]
+        [Route("api/Archive")]
+        public IActionResult ArchiveNote(int noteId)
+        {
+            try
+            {
+                string resultMessage = this.manager.ArchiveNote(noteId);
+                if (resultMessage.Equals("Successful"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Moved to Archive Successfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Archive Note unsuccessful" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// UnArchive Note API
+        /// </summary>
+        /// <param name="noteId">UnArchive Note</param>
+        /// <returns>Result of the action</returns>
+        [HttpPut]
+        [Route("api/UnArchive")]
+        public IActionResult UnArchiveNote(int noteId)
+        {
+            try
+            {
+                string resultMessage = this.manager.UnArchiveNote(noteId);
+                if (resultMessage.Equals("Successful"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "UnArchive Successfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "UnArchive Note unsuccessful" });
                 }
             }
             catch (Exception ex)

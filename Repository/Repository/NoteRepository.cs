@@ -60,7 +60,7 @@ namespace Repository.Repository
         {
             try
             {
-                var note = this.userContext.Notes.Where(x => x.NoteId == x.NoteId).FirstOrDefault();
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteData.NoteId).FirstOrDefault();
                 if (note != null)
                 {
                     note.Title = noteData.Title;
@@ -118,6 +118,60 @@ namespace Repository.Repository
                 if (note != null)
                 {
                     this.userContext.Notes.Remove(note);
+                    this.userContext.SaveChanges();
+                    return "Successful";
+                }
+
+                return "Unsuccessful";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Archive Note Method
+        /// </summary>
+        /// <param name="noteId">Archive Note data</param>
+        /// <returns>Returns the archive status</returns>
+        public string ArchiveNote(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    note.Archive = true;
+
+                    this.userContext.Notes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "Successful";
+                }
+
+                return "Unsuccessful";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// UnArchive Note Method
+        /// </summary>
+        /// <param name="noteId">UnArchive Note Data</param>
+        /// <returns>Returns the archive status</returns>
+        public string UnArchiveNote(int noteId)
+        {
+            try
+            {
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).FirstOrDefault();
+                if (note != null)
+                {
+                    note.Archive = false;
+
+                    this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
                     return "Successful";
                 }

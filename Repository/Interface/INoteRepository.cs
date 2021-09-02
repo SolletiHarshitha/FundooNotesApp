@@ -41,5 +41,19 @@ namespace Repository.Interface
         /// <param name="id">To Delete Note</param>
         /// <returns>Result of the action</returns>
         string DeleteNoteForever(int id);
+
+        /// <summary>
+        /// Archive Note Interface
+        /// </summary>
+        /// <param name="noteId">To Archive Note</param>
+        /// <returns>Result of the action</returns>
+        string ArchiveNote(int noteId);
+
+        /// <summary>
+        /// UnArchive Note Interface
+        /// </summary>
+        /// <param name="noteId">To UnArchive Note</param>
+        /// <returns>Result of the action</returns>
+        string UnArchiveNote(int noteId);
     }
 }
