@@ -38,6 +38,9 @@ namespace FundooNotes
                 options => options.UseSqlServer(this.Configuration.GetConnectionString("UserDbConnection")));
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
+            services.AddTransient<INoteRepository, NoteRepository>();
+            services.AddTransient<INoteManager, NoteManager>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1.0", new AppInfo { Title = "FundooNotes",Description = "Manage your notes", Version = "1.0" });
