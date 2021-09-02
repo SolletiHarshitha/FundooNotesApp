@@ -151,5 +151,15 @@ namespace Manager.Manager
         {
             return this.repository.DeleteReminder(noteId);
         }
+
+        /// <summary>
+        /// Empty Trash Method
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>Result of the method</returns>
+        public bool EmptyTrash(int userId)
+        {
+            return this.repository.EmptyTrash(userId);
+        }
     }
 }

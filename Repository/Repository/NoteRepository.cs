@@ -344,5 +344,30 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Empty Trash Method
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>Returns the Empty trash status</returns>
+        public bool EmptyTrash(int userId)
+        {
+            try
+            {
+                var note = this.userContext.Notes.Where(x => x.UserId == userId && x.Trash == true).ToList();
+                if (note.Count > 0)
+                {
+                    this.userContext.Notes.RemoveRange(note);
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

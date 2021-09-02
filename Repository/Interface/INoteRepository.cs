@@ -99,5 +99,12 @@ namespace Repository.Interface
         /// <param name="noteId">Note Id Parameter</param>
         /// <returns>Result of the action</returns>
         string DeleteReminder(int noteId);
+
+        /// <summary>
+        /// Empty Trash Interface
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>Result of the action</returns>
+        bool EmptyTrash(int userId);
     }
 }

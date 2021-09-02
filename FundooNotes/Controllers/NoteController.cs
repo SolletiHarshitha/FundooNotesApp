@@ -334,7 +334,6 @@ namespace FundooNotes.Controllers
         /// Remind Me API
         /// </summary>
         /// <param name="noteId">Note Id Parameter</param>
-        /// <param name="reminder">Reminder Parameter</param>
         /// <returns>result of the action</returns>
         [HttpPut]
         [Route("api/DeleteReminder")]
@@ -350,6 +349,33 @@ namespace FundooNotes.Controllers
                 else
                 {
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Reminder doesn't deleted" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// EMPTY Trash API
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpDelete]
+        [Route("api/EmptyTrash")]
+        public IActionResult EmptyTrash(int userId)
+        {
+            try
+            {
+                bool resultMessage = this.manager.EmptyTrash(userId);
+                if (resultMessage)
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Empty Trash Successfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Unsuccessful! No Notes in trash" });
                 }
             }
             catch (Exception ex)
