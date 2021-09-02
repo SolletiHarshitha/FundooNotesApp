@@ -27,5 +27,12 @@ namespace Repository.Interface
         /// <param name="noteData">To Update Note</param>
         /// <returns>Result of the action</returns>
         string UpdateNote(NotesModel noteData);
+
+        /// <summary>
+        /// Delete Note Interface
+        /// </summary>
+        /// <param name="id">To Delete Note</param>
+        /// <returns>Result of the action</returns>
+        string DeleteNoteMoveToTrash(int id);
     }
 }

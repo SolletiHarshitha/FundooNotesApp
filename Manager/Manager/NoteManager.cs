@@ -49,5 +49,15 @@ namespace Manager.Manager
         {
             return this.repository.UpdateNote(noteData);
         }
+
+        /// <summary>
+        /// Delete Note Method
+        /// </summary>
+        /// <param name="id">To Delete Note</param>
+        /// <returns>Result of the action</returns>
+        public string DeleteNoteMoveToTrash(int id)
+        {
+            return this.repository.DeleteNoteMoveToTrash(id);
+        }
     }
 }

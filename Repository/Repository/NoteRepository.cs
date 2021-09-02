@@ -8,10 +8,10 @@
 namespace Repository.Repository
 {
     using System;
+    using System.Linq;
     using Models;
     using global::Repository.Context;
     using global::Repository.Interface;
-    using System.Linq;
 
     /// <summary>
     /// Note Repository class
@@ -70,7 +70,34 @@ namespace Repository.Repository
                     this.userContext.SaveChanges();
                     return "Updated Successfully";
                 }
+
                 return "Not Updated";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Delete Note API
+        /// </summary>
+        /// <param name="id">Delete Note</param>
+        /// <returns>Returns the delete status</returns>
+        public string DeleteNoteMoveToTrash(int id)
+        {
+            try 
+            {
+                var note = this.userContext.Notes.Find(id);
+                if (note != null)
+                {
+                    note.Trash = true;
+                    this.userContext.Notes.Update(note);
+                    this.userContext.SaveChanges();
+                    return "Successful";
+                }
+
+                return "Unsuccessful";
             }
             catch (Exception ex)
             {
