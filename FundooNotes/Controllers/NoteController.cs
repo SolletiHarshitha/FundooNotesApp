@@ -57,5 +57,32 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Update Note API
+        /// </summary>
+        /// <param name="noteData">Data to update note</param>
+        /// <returns>Result of the action</returns>
+        [HttpPut]
+        [Route("api/UpdateNote")]
+        public IActionResult UpdateNote([FromBody] NotesModel noteData)
+        {
+            try
+            {
+                string resultMessage = this.manager.UpdateNote(noteData);
+                if (resultMessage.Equals("Updated Successfully"))
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note Updated Successfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't updated successfully" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }

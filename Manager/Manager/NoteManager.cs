@@ -39,5 +39,15 @@ namespace Manager.Manager
         {
             return this.repository.AddNote(noteData);
         }
+
+        /// <summary>
+        /// Update Note Method
+        /// </summary>
+        /// <param name="noteData">To Update note</param>
+        /// <returns>Result of the action</returns>
+        public string UpdateNote(NotesModel noteData)
+        {
+            return this.repository.UpdateNote(noteData);
+        }
     }
 }
