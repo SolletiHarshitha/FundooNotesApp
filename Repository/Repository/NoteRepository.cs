@@ -143,6 +143,10 @@ namespace Repository.Repository
                 var note = this.userContext.Notes.Where(x => x.NoteId == noteId && x.Trash == false).FirstOrDefault();
                 if (note != null)
                 {
+                    if(note.Pin == true)
+                    {
+                        note.Pin = false;
+                    }
                     note.Archive = true;
 
                     this.userContext.Notes.Update(note);
@@ -197,6 +201,11 @@ namespace Repository.Repository
                 var note = this.userContext.Notes.Where(x => x.NoteId == noteId && x.Trash == false).FirstOrDefault();
                 if (note != null)
                 {
+                    if (note.Archive == true)
+                    {
+                        note.Archive = false;
+                    }
+
                     note.Pin = true;
 
                     this.userContext.Notes.Update(note);

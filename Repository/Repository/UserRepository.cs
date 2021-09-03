@@ -245,7 +245,7 @@ namespace Repository.Repository
         /// <returns>Generates token</returns>
         public string GenerateToken(string email)
         {
-            byte[] key = Convert.FromBase64String(this.config["SecretKey"]);
+            var key = Encoding.UTF8.GetBytes(this.config["SecretKey"]);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {

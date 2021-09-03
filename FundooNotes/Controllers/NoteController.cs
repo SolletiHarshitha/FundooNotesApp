@@ -10,12 +10,14 @@ namespace FundooNotes.Controllers
     using System;
     using System.Collections.Generic;
     using Manager.Interface;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Models;
 
     /// <summary>
     /// Note Controller Class
     /// </summary>
+    [Authorize]
     public class NoteController : ControllerBase
     {
         /// <summary>
@@ -77,7 +79,7 @@ namespace FundooNotes.Controllers
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't updated successfully" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't updated!" });
                 }
             }
             catch (Exception ex)
@@ -104,7 +106,7 @@ namespace FundooNotes.Controllers
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't moved successfully" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't Deleted!" });
                 }
             }
             catch (Exception ex)
@@ -127,11 +129,11 @@ namespace FundooNotes.Controllers
                 string resultMessage = this.manager.DeleteNoteForever(noteId);
                 if (resultMessage.Equals("Successful"))
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note deleted Successfully" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note deleted Permanently" });
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note deleted successfully" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't deleted!" });
                 }
             }
             catch (Exception ex)
@@ -158,7 +160,7 @@ namespace FundooNotes.Controllers
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Archive Note unsuccessful" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't archived" });
                 }
             }
             catch (Exception ex)
@@ -181,11 +183,11 @@ namespace FundooNotes.Controllers
                 string resultMessage = this.manager.UnArchiveNote(noteId);
                 if (resultMessage.Equals("Successful"))
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "UnArchive Successfully" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "UnArchived Successfully" });
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "UnArchive Note unsuccessful" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't Unarchived" });
                 }
             }
             catch (Exception ex)
@@ -208,11 +210,11 @@ namespace FundooNotes.Controllers
                 string resultMessage = this.manager.PinNote(noteId);
                 if (resultMessage.Equals("Successful"))
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Pin Note Successfully" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note  pinned Successfully" });
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Pin Note unsuccessful" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't pinned" });
                 }
             }
             catch (Exception ex)
@@ -239,7 +241,7 @@ namespace FundooNotes.Controllers
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "UnPin Note unsuccessful" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Note doesn't unpinned!" });
                 }
             }
             catch (Exception ex)
@@ -263,11 +265,11 @@ namespace FundooNotes.Controllers
                 string resultMessage = this.manager.GetColor(noteId, color);
                 if (resultMessage.Equals("Successful"))
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Color added Successfully" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Color changed Successfully" });
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Color not added successfully" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Color not changed!" });
                 }
             }
             catch (Exception ex)

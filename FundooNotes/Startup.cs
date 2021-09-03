@@ -43,7 +43,7 @@ namespace FundooNotes
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1.0", new AppInfo { Title = "FundooNotes",Description = "Manage your notes", Version = "1.0" });
+                c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "FundooNotes",Description = "Manage your notes", Version = "1.0" });
                 // To Enable authorization using Swagger (JWT)  
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
