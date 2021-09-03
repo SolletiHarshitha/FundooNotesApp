@@ -114,5 +114,12 @@ namespace Manager.Interface
         /// <param name="userId">UserId Parameter</param>
         /// <returns>Result of the action</returns>
         public List<NotesModel> GetTrashNotes(int userId);
+
+        /// <summary>
+        /// Get Archive Interface
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>Result of the action</returns>
+        public List<NotesModel> GetArchiveNotes(int userId);
     }
 }

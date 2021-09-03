@@ -411,5 +411,32 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Get Archive Method
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpGet]
+        [Route("api/GetArchiveNotes")]
+        public IActionResult GetArchiveNotes(int userId)
+        {
+            try
+            {
+                List<NotesModel> archiveList = this.manager.GetArchiveNotes(userId);
+                if (archiveList.Count > 0)
+                {
+                    return this.Ok(new { Status = true, Message = "Successful", Data = archiveList });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Unsuccessful! No Archive Notes" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }

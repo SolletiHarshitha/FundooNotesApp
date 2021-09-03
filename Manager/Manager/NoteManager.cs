@@ -172,5 +172,15 @@ namespace Manager.Manager
         {
             return this.repository.GetTrashNotes(userId);
         }
+
+        /// <summary>
+        /// Get Archive Notes Method
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>Result of the method</returns>
+        public List<NotesModel> GetArchiveNotes(int userId)
+        {
+            return this.repository.GetArchiveNotes(userId);
+        }
     }
 }

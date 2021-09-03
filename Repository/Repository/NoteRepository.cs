@@ -388,5 +388,23 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Get Archive Notes Method
+        /// </summary>
+        /// <param name="userId">User Id Parameter</param>
+        /// <returns>List of notes in archive</returns>
+        public List<NotesModel> GetArchiveNotes(int userId)
+        {
+            try
+            {
+                var trashNotes = this.userContext.Notes.Where(x => x.UserId == userId && x.Archive == true && x.Trash == false).ToList();
+                return trashNotes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
