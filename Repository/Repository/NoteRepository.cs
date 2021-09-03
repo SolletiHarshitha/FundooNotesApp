@@ -406,5 +406,23 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Get Reminder Notes
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>List of notes in reminders</returns>
+        public List<NotesModel> GetReminderNotes(int userId)
+        {
+            try
+            {
+                var trashNotes = this.userContext.Notes.Where(x => x.UserId == userId && x.Remainder != null && x.Trash == false).ToList();
+                return trashNotes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

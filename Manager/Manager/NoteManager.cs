@@ -182,5 +182,15 @@ namespace Manager.Manager
         {
             return this.repository.GetArchiveNotes(userId);
         }
+
+        /// <summary>
+        /// Get Reminder Notes
+        /// </summary>
+        /// <param name="userId">User Id Parameter</param>
+        /// <returns>Result of the method</returns>
+        public List<NotesModel> GetReminderNotes(int userId)
+        {
+            return this.repository.GetReminderNotes(userId);
+        }
     }
 }

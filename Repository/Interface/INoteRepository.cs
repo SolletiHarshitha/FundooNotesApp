@@ -121,5 +121,12 @@ namespace Repository.Interface
         /// <param name="userId">UserId Parameter</param>
         /// <returns>Result of the action</returns>
         public List<NotesModel> GetArchiveNotes(int userId);
+
+        /// <summary>
+        /// Get Reminder Interface
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>Result of the action</returns>
+        public List<NotesModel> GetReminderNotes(int userId);
     }
 }
