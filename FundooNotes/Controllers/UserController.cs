@@ -10,6 +10,7 @@ namespace FundooNotes.Controllers
     using System;
     using Manager.Interface;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
     using Models;
 
     /// <summary>
@@ -22,13 +23,16 @@ namespace FundooNotes.Controllers
         /// </summary>
         private readonly IUserManager manager;
 
+        private readonly ILogger<UserController> _logger;
+
         /// <summary>
         /// Initializes a new instance of the UserController class
         /// </summary>
         /// <param name="manager"> IUserManager manager</param>
-        public UserController(IUserManager manager)
+        public UserController(IUserManager manager, ILogger<UserController> logger)
         {
             this.manager = manager;
+            this._logger = logger;
         }
 
         /// <summary>
@@ -42,19 +46,23 @@ namespace FundooNotes.Controllers
         {
             try
             {
+                _logger.LogInformation(userData.FirstName + " is trying to register");
                 string expectedResult = "Registration Successful";
                 string actualResult = this.manager.Register(userData);
                 if (expectedResult.Equals(actualResult))
                 {
+                    _logger.LogInformation(userData.FirstName + " has successfully registered");
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "New User Added Successful", Data = actualResult });
                 }
                 else
                 {
+                    _logger.LogInformation("Registration Unsuccessful");
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Registration Unsuccessful", Data = actualResult });
                 }
             }
             catch (Exception ex)
             {
+                _logger.LogError(userData.FirstName + " got an exception");
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }

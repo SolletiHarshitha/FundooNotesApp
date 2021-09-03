@@ -56,7 +56,7 @@ namespace Repository.Repository
         {
             try
             {
-                var newUser = this.userContext.Users.Where(x => x.Email == userData.Email);
+                var newUser = this.userContext.Users.Where(x => x.Email == userData.Email).FirstOrDefault();
                 if (newUser == null)
                 {
                     if (userData != null)
