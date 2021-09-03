@@ -8,11 +8,12 @@
 namespace Repository.Repository
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Models;
     using global::Repository.Context;
     using global::Repository.Interface;
-
+    
     /// <summary>
     /// Note Repository class
     /// </summary>
@@ -363,6 +364,24 @@ namespace Repository.Repository
                 }
 
                 return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get Trash Notes Method
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>List of notes in trash</returns>
+        public List<NotesModel> GetTrashNotes(int userId)
+        {
+            try
+            {
+                var trashNotes = this.userContext.Notes.Where(x => x.UserId == userId && x.Trash == true).ToList();
+                return trashNotes;
             }
             catch (Exception ex)
             {

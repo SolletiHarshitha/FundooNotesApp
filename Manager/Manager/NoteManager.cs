@@ -7,6 +7,7 @@
 
 namespace Manager.Manager
 {
+    using System.Collections.Generic;
     using global::Manager.Interface;
     using Models;
     using Repository.Interface;
@@ -160,6 +161,16 @@ namespace Manager.Manager
         public bool EmptyTrash(int userId)
         {
             return this.repository.EmptyTrash(userId);
+        }
+
+        /// <summary>
+        /// Get Trash Notes Method
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>Result of the method</returns>
+        public List<NotesModel> GetTrashNotes(int userId)
+        {
+            return this.repository.GetTrashNotes(userId);
         }
     }
 }

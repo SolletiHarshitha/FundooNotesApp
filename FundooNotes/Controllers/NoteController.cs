@@ -8,6 +8,7 @@
 namespace FundooNotes.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using Manager.Interface;
     using Microsoft.AspNetCore.Mvc;
     using Models;
@@ -376,6 +377,33 @@ namespace FundooNotes.Controllers
                 else
                 {
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Unsuccessful! No Notes in trash" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Get Trash Notes API
+        /// </summary>
+        /// <param name="userId">UserId Parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpGet]
+        [Route("api/GetTrashNotes")]
+        public IActionResult GetTrashNotes(int userId)
+        {
+            try
+            {
+                List<NotesModel> trashList = this.manager.GetTrashNotes(userId);
+                if (trashList.Count > 0)
+                {
+                    return this.Ok(new { Status = true, Message = "Successful", Data = trashList });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Unsuccessful!" });
                 }
             }
             catch (Exception ex)
