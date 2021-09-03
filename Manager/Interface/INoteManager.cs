@@ -128,5 +128,12 @@ namespace Manager.Interface
         /// <param name="userId">UserId Parameter</param>
         /// <returns>Result of the action</returns>
         public List<NotesModel> GetReminderNotes(int userId);
+
+        /// <summary>
+        /// Get Notes
+        /// </summary>
+        /// <param name="userId">User Id Parameter</param>
+        /// <returns>Result of the action</returns>
+        public List<NotesModel> GetNotes(int userId);
     }
 }

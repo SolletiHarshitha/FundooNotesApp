@@ -17,7 +17,7 @@ namespace FundooNotes.Controllers
     /// <summary>
     /// Note Controller Class
     /// </summary>
-    [Authorize]
+    //[Authorize]
     public class NoteController : ControllerBase
     {
         /// <summary>
@@ -460,6 +460,28 @@ namespace FundooNotes.Controllers
                 else
                 {
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Unsuccessful! No reminder Notes" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("api/GetNotes")]
+        public IActionResult GetNotes(int userId)
+        {
+            try 
+            {
+                List<NotesModel> notes = this.manager.GetNotes(userId);
+                if (notes.Count > 0)
+                {
+                    return this.Ok(new { Status = true, Message = "Successful", Data = notes });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Unsuccessful!" });
                 }
             }
             catch (Exception ex)

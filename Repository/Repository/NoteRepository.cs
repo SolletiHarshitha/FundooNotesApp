@@ -143,10 +143,11 @@ namespace Repository.Repository
                 var note = this.userContext.Notes.Where(x => x.NoteId == noteId && x.Trash == false).FirstOrDefault();
                 if (note != null)
                 {
-                    if(note.Pin == true)
+                    if (note.Pin == true)
                     {
                         note.Pin = false;
                     }
+
                     note.Archive = true;
 
                     this.userContext.Notes.Update(note);
@@ -427,6 +428,24 @@ namespace Repository.Repository
             {
                 var trashNotes = this.userContext.Notes.Where(x => x.UserId == userId && x.Remainder != null && x.Trash == false).ToList();
                 return trashNotes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get Notes
+        /// </summary>
+        /// <param name="userId">User Id Parameter</param>
+        /// <returns>List of notes</returns>
+        public List<NotesModel> GetNotes(int userId)
+        {
+            try 
+            {
+                var notes = this.userContext.Notes.Where(x => x.UserId == userId && x.Trash == false && x.Archive == false).ToList();
+                return notes;
             }
             catch (Exception ex)
             {
