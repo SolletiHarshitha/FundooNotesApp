@@ -27,6 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Repository\NoteRepository.cs">
+      <ExcludeFromSourceAnalysis>True</ExcludeFromSourceAnalysis>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Update="Repository\UserRepository.cs">
       <ExcludeFromSourceAnalysis>True</ExcludeFromSourceAnalysis>
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
