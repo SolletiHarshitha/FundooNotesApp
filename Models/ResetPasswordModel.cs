@@ -1,5 +1,5 @@
 ﻿// ----------------------------------------------------------------------------------------------------------
-// <copyright file="LoginModel.cs" company="Bridgelabz"> 
+// <copyright file="ResetPasswordModel.cs" company="Bridgelabz"> 
 // Copyright © 2021 Company="BridgeLabz" 
 // </copyright> 
 // <creator name="Harshitha Solleti"/> 
@@ -10,9 +10,9 @@ namespace Models
     using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// Login Model Class contains Login details
+    /// Reset Password Class contains the fields to reset the password
     /// </summary>
-    public class LoginModel
+    public class ResetPasswordModel
     {
         /// <summary>
         /// Gets or sets the email 
@@ -21,9 +21,15 @@ namespace Models
         public string Email { get; set; }
 
         /// <summary>
-        /// Gets or sets the password
+        /// Gets or sets the new password 
         /// </summary>
         [Required]
-        public string Password { get; set; }
+        public string NewPassword { get; set; }
+
+        /// <summary>
+        /// Gets or sets the confirm password
+        /// </summary>
+        [Required]
+        public string ConfirmNewPassword { get; set; }
     }
 }
