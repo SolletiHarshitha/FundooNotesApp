@@ -38,13 +38,13 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="noteData">Data needed to add a note</param>
         /// <returns>Returns the status of the add note</returns>
-        public string AddNote(NotesModel noteData)
+        public bool AddNote(NotesModel noteData)
         {
             try
             {
                 this.userContext.Notes.Add(noteData);
                 this.userContext.SaveChanges();
-                return "Added Successfully";
+                return true;
             }
             catch (Exception ex)
             {
@@ -57,11 +57,11 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="noteData">Update note</param>
         /// <returns>Returns the update status</returns>
-        public string UpdateNote(NotesModel noteData)
+        public bool UpdateNote(NotesModel noteData)
         {
             try
             {
-                var note = this.userContext.Notes.Where(x => x.NoteId == noteData.NoteId).FirstOrDefault();
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteData.NoteId && x.Trash == false).FirstOrDefault();
                 if (note != null)
                 {
                     note.Title = noteData.Title;
@@ -69,10 +69,10 @@ namespace Repository.Repository
 
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
-                    return "Updated Successfully";
+                    return true;
                 }
 
-                return "Not Updated";
+                return false;
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="id">Delete Note</param>
         /// <returns>Returns the delete status</returns>
-        public string DeleteNoteMoveToTrash(int id)
+        public bool DeleteNoteMoveToTrash(int id)
         {
             try 
             {
@@ -94,13 +94,13 @@ namespace Repository.Repository
                 {
                     note.Trash = true;
                     note.Pin = false;
-                    note.Archive = false;
+
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
-                    return "Successful";
+                    return true;
                 }
 
-                return "Unsuccessful";
+                return false;
             }
             catch (Exception ex)
             {
@@ -113,7 +113,7 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="id">Delete Note</param>
         /// <returns>Returns the delete status</returns>
-        public string DeleteNoteForever(int id)
+        public bool DeleteNoteForever(int id)
         {
             try
             {
@@ -122,10 +122,10 @@ namespace Repository.Repository
                 {
                     this.userContext.Notes.Remove(note);
                     this.userContext.SaveChanges();
-                    return "Successful";
+                    return true;
                 }
 
-                return "Unsuccessful";
+                return false;
             }
             catch (Exception ex)
             {
@@ -138,7 +138,7 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="noteId">Archive Note data</param>
         /// <returns>Returns the archive status</returns>
-        public string ArchiveNote(int noteId)
+        public bool ArchiveNote(int noteId)
         {
             try
             {
@@ -154,10 +154,10 @@ namespace Repository.Repository
 
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
-                    return "Successful";
+                    return true;
                 }
 
-                return "Unsuccessful";
+                return false;
             }
             catch (Exception ex)
             {
@@ -170,7 +170,7 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="noteId">UnArchive Note Data</param>
         /// <returns>Returns the archive status</returns>
-        public string UnArchiveNote(int noteId)
+        public bool UnArchiveNote(int noteId)
         {
             try
             {
@@ -181,10 +181,10 @@ namespace Repository.Repository
 
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
-                    return "Successful";
+                    return true;
                 }
 
-                return "Unsuccessful";
+                return false;
             }
             catch (Exception ex)
             {
@@ -197,7 +197,7 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="noteId">Pin Note Data</param>
         /// <returns>Returns the pin status</returns>
-        public string PinNote(int noteId)
+        public bool PinNote(int noteId)
         {
             try
             {
@@ -213,10 +213,10 @@ namespace Repository.Repository
 
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
-                    return "Successful";
+                    return true;
                 }
 
-                return "Unsuccessful";
+                return false;
             }
             catch (Exception ex)
             {
@@ -229,7 +229,7 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="noteId">UnPin Note Data</param>
         /// <returns>Returns the pin status</returns>
-        public string UnPinNote(int noteId)
+        public bool UnPinNote(int noteId)
         {
             try
             {
@@ -240,10 +240,10 @@ namespace Repository.Repository
 
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
-                    return "Successful";
+                    return true;
                 }
 
-                return "Unsuccessful";
+                return false;
             }
             catch (Exception ex)
             {
@@ -257,7 +257,7 @@ namespace Repository.Repository
         /// <param name="noteId">Note Id Parameter</param>
         /// <param name="color">Color Parameter</param>
         /// <returns>Returns the status of color</returns>
-        public string GetColor(int noteId, string color)
+        public bool GetColor(int noteId, string color)
         {
             try 
             {
@@ -268,10 +268,10 @@ namespace Repository.Repository
 
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
-                    return "Successful";
+                    return true;
                 }
 
-                return "Unsuccessful";
+                return false;
             }
             catch (Exception ex)
             {
@@ -284,7 +284,7 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="noteId">Note Id Parameter</param>
         /// <returns>returns the status of the restore note</returns>
-        public string RestoreNote(int noteId)
+        public bool RestoreNote(int noteId)
         {
             try 
             {
@@ -294,10 +294,10 @@ namespace Repository.Repository
                     note.Trash = false;
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
-                    return "Successful";
+                    return true;
                 }
 
-                return "Unsuccessful";
+                return false;
             }
             catch (Exception ex)
             {
@@ -311,7 +311,7 @@ namespace Repository.Repository
         /// <param name="noteId">Note Id Parameter</param>
         /// <param name="reminder">Reminder Parameter</param>
         /// <returns>Returns the Reminder status</returns>
-        public string RemindMe(int noteId, string reminder)
+        public bool RemindMe(int noteId, string reminder)
         {
             try 
             {
@@ -321,10 +321,10 @@ namespace Repository.Repository
                     note.Remainder = reminder;
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
-                    return "Successful";
+                    return true;
                 }
 
-                return "Unsuccessful";
+                return false;
             }
             catch (Exception ex)
             {
@@ -337,7 +337,7 @@ namespace Repository.Repository
         /// </summary>
         /// <param name="noteId">Note Id Parameter</param>
         /// <returns>Returns the Delete Reminder status</returns>
-        public string DeleteReminder(int noteId)
+        public bool DeleteReminder(int noteId)
         {
             try
             {
@@ -347,10 +347,10 @@ namespace Repository.Repository
                     note.Remainder = null;
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
-                    return "Successful";
+                    return true;
                 }
 
-                return "Unsuccessful";
+                return false;
             }
             catch (Exception ex)
             {

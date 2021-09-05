@@ -20,56 +20,56 @@ namespace Repository.Interface
         /// </summary>
         /// <param name="noteData">Note details to add</param>
         /// <returns>Result of the action</returns>
-        string AddNote(NotesModel noteData);
+        bool AddNote(NotesModel noteData);
 
         /// <summary>
         /// Update Note Interface
         /// </summary>
         /// <param name="noteData">To Update Note</param>
         /// <returns>Result of the action</returns>
-        string UpdateNote(NotesModel noteData);
+        bool UpdateNote(NotesModel noteData);
 
         /// <summary>
         /// Delete Note Interface
         /// </summary>
         /// <param name="id">To Delete Note</param>
         /// <returns>Result of the action</returns>
-        string DeleteNoteMoveToTrash(int id);
+        bool DeleteNoteMoveToTrash(int id);
 
         /// <summary>
         /// Delete Note Interface
         /// </summary>
         /// <param name="id">To Delete Note</param>
         /// <returns>Result of the action</returns>
-        string DeleteNoteForever(int id);
+        bool DeleteNoteForever(int id);
 
         /// <summary>
         /// Archive Note Interface
         /// </summary>
         /// <param name="noteId">To Archive Note</param>
         /// <returns>Result of the action</returns>
-        string ArchiveNote(int noteId);
+        bool ArchiveNote(int noteId);
 
         /// <summary>
         /// UnArchive Note Interface
         /// </summary>
         /// <param name="noteId">To UnArchive Note</param>
         /// <returns>Result of the action</returns>
-        string UnArchiveNote(int noteId);
+        bool UnArchiveNote(int noteId);
 
         /// <summary>
         /// Pin Note Interface
         /// </summary>
         /// <param name="noteId">Pin Note</param>
         /// <returns>Result of the action</returns>
-        string PinNote(int noteId);
+        bool PinNote(int noteId);
 
         /// <summary>
         /// UnPin Note Interface
         /// </summary>
         /// <param name="noteId">To UnPin Note</param>
         /// <returns>Result of the action</returns>
-        string UnPinNote(int noteId);
+        bool UnPinNote(int noteId);
 
         /// <summary>
         /// Get Color Interface
@@ -77,14 +77,14 @@ namespace Repository.Interface
         /// <param name="noteId">Note Id Parameter</param>
         /// <param name="color">Color Parameter</param>
         /// <returns>Result of the action</returns>
-        string GetColor(int noteId, string color);
+        bool GetColor(int noteId, string color);
 
         /// <summary>
         /// Restore Note Interface
         /// </summary>
         /// <param name="noteId">Note Id Parameter</param>
         /// <returns>Results of the action</returns>
-        string RestoreNote(int noteId);
+        bool RestoreNote(int noteId);
 
         /// <summary>
         /// Add Reminder Interface
@@ -92,14 +92,14 @@ namespace Repository.Interface
         /// <param name="noteId">Note Id Parameter</param>
         /// <param name="reminder">Reminder Parameter</param>
         /// <returns>Result of the action</returns>
-        string RemindMe(int noteId, string reminder);
+        bool RemindMe(int noteId, string reminder);
 
         /// <summary>
         /// Delete Reminder Interface
         /// </summary>
         /// <param name="noteId">Note Id Parameter</param>
         /// <returns>Result of the action</returns>
-        string DeleteReminder(int noteId);
+        bool DeleteReminder(int noteId);
 
         /// <summary>
         /// Empty Trash Interface

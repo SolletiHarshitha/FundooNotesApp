@@ -17,7 +17,7 @@ namespace FundooNotes.Controllers
     /// <summary>
     /// Note Controller Class
     /// </summary>
-    //[Authorize]
+    ////[Authorize]
     public class NoteController : ControllerBase
     {
         /// <summary>
@@ -45,8 +45,8 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.AddNote(noteData);
-                if (resultMessage.Equals("Added Successfully"))
+                bool resultMessage = this.manager.AddNote(noteData);
+                if (resultMessage)
                 {
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "New Note Added Successful" });
                 }
@@ -72,8 +72,8 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.UpdateNote(noteData);
-                if (resultMessage.Equals("Updated Successfully"))
+                bool resultMessage = this.manager.UpdateNote(noteData);
+                if (resultMessage)
                 {
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note Updated Successfully" });
                 }
@@ -99,10 +99,10 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.DeleteNoteMoveToTrash(noteId);
-                if (resultMessage.Equals("Successful"))
+                bool resultMessage = this.manager.DeleteNoteMoveToTrash(noteId);
+                if (resultMessage)
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note Moved to trash Successfully" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note trashed!" });
                 }
                 else
                 {
@@ -126,10 +126,10 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.DeleteNoteForever(noteId);
+                bool resultMessage = this.manager.DeleteNoteForever(noteId);
                 if (resultMessage.Equals("Successful"))
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note deleted Permanently" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note deleted forever" });
                 }
                 else
                 {
@@ -153,10 +153,10 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.ArchiveNote(noteId);
-                if (resultMessage.Equals("Successful"))
+                bool resultMessage = this.manager.ArchiveNote(noteId);
+                if (resultMessage)
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Moved to Archive Successfully" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note Archived" });
                 }
                 else
                 {
@@ -180,10 +180,10 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.UnArchiveNote(noteId);
-                if (resultMessage.Equals("Successful"))
+                bool resultMessage = this.manager.UnArchiveNote(noteId);
+                if (resultMessage)
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "UnArchived Successfully" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note UnArchived" });
                 }
                 else
                 {
@@ -207,10 +207,10 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.PinNote(noteId);
-                if (resultMessage.Equals("Successful"))
+                bool resultMessage = this.manager.PinNote(noteId);
+                if (resultMessage)
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note  pinned Successfully" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note  pinned!" });
                 }
                 else
                 {
@@ -234,10 +234,10 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.UnPinNote(noteId);
+                bool resultMessage = this.manager.UnPinNote(noteId);
                 if (resultMessage.Equals("Successful"))
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "UnPin note Successfully" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note UnPinned" });
                 }
                 else
                 {
@@ -262,8 +262,8 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.GetColor(noteId, color);
-                if (resultMessage.Equals("Successful"))
+                bool resultMessage = this.manager.GetColor(noteId, color);
+                if (resultMessage)
                 {
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "Color changed Successfully" });
                 }
@@ -289,8 +289,8 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.RestoreNote(noteId);
-                if (resultMessage.Equals("Successful"))
+                bool resultMessage = this.manager.RestoreNote(noteId);
+                if (resultMessage)
                 {
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note restored Successfully" });
                 }
@@ -317,10 +317,10 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.RemindMe(noteId, reminder);
-                if (resultMessage.Equals("Successful"))
+                bool resultMessage = this.manager.RemindMe(noteId, reminder);
+                if (resultMessage)
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Note added to reminders Successfully" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Reminder set to the note successfully" });
                 }
                 else
                 {
@@ -344,8 +344,8 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                string resultMessage = this.manager.DeleteReminder(noteId);
-                if (resultMessage.Equals("Successful"))
+                bool resultMessage = this.manager.DeleteReminder(noteId);
+                if (resultMessage)
                 {
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "Reminder deleteted Successfully" });
                 }
@@ -468,6 +468,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Notes API
+        /// </summary>
+        /// <param name="userId">The Parameter</param>
+        /// <returns>Result of the action</returns>
         [HttpGet]
         [Route("api/GetNotes")]
         public IActionResult GetNotes(int userId)
