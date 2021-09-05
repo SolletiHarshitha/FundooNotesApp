@@ -93,6 +93,8 @@ namespace Repository.Repository
                 if (note != null)
                 {
                     note.Trash = true;
+                    note.Pin = false;
+                    note.Archive = false;
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
                     return "Successful";
