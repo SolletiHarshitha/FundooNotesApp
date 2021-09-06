@@ -32,10 +32,5 @@ namespace Repository.Context
         /// Gets or sets the notes table
         /// </summary>
         public DbSet<NotesModel> Notes { get; set; }
-
-        /// <summary>
-        /// Gets or sets the collaborator table
-        /// </summary>
-        public DbSet<CollaboratorModel> Collaborator { get; set; }
     }
 }
