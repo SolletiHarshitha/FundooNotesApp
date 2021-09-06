@@ -8,6 +8,7 @@
 namespace FundooNotes.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using Manager.Interface;
     using Microsoft.AspNetCore.Mvc;
     using Models;
@@ -46,6 +47,33 @@ namespace FundooNotes.Controllers
                 if (result)
                 {
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "Collaborator added Successfully!" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Collaborator doesn't added" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Get Collaborator API
+        /// </summary>
+        /// <param name="noteId">The Parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpGet]
+        [Route("api/GetCollaborator")]
+        public IActionResult GetCollaborator(int noteId)
+        {
+            try
+            {
+                List<CollaboratorModel> result = this.manager.GetCollaborator(noteId);
+                if (result.Count > 0)
+                {
+                    return this.Ok(new { Status = true, Message = "Collaborator List", Data = result });
                 }
                 else
                 {

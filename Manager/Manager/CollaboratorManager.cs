@@ -7,6 +7,7 @@
 
 namespace Manager.Manager
 {
+    using System.Collections.Generic;
     using global::Manager.Interface;
     using Models;
     using Repository.Interface;
@@ -38,6 +39,16 @@ namespace Manager.Manager
         public bool AddCollaborator(CollaboratorModel collaborator)
         {
             return this.repository.AddCollaborator(collaborator);
+        }
+
+        /// <summary>
+        /// Get collaborator Method
+        /// </summary>
+        /// <param name="noteId">The Parameter</param>
+        /// <returns>Result of the method</returns>
+        public List<CollaboratorModel> GetCollaborator(int noteId)
+        {
+            return this.repository.GetCollaborator(noteId);
         }
     }
 }

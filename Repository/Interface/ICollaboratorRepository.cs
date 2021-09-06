@@ -7,6 +7,7 @@
 
 namespace Repository.Interface
 {
+    using System.Collections.Generic;
     using Models;
 
     /// <summary>
@@ -20,5 +21,12 @@ namespace Repository.Interface
         /// <param name="collaborator">The Parameter</param>
         /// <returns>Result of Boolean Method</returns>
         bool AddCollaborator(CollaboratorModel collaborator);
+
+        /// <summary>
+        /// Get Collaborator Method
+        /// </summary>
+        /// <param name="noteId">The Parameter</param>
+        /// <returns>Result of Boolean Method</returns>
+        public List<CollaboratorModel> GetCollaborator(int noteId);
     }
 }
