@@ -58,6 +58,11 @@ namespace FundooNotes.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove Label API
+        /// </summary>
+        /// <param name="labelId">The Parameter</param>
+        /// <returns>Result of the action</returns>
         [HttpDelete]
         [Route("api/RemoveLabel")]
         public IActionResult RemoveLabel(int labelId)
