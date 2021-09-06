@@ -50,5 +50,15 @@ namespace Manager.Manager
         {
             return this.repository.GetCollaborator(noteId);
         }
+
+        /// <summary>
+        /// Remove Collaborator Method
+        /// </summary>
+        /// <param name="collaboratorId">The Parameter</param>
+        /// <returns>Result of the Method</returns>
+        public bool RemoveCollaborator(int collaboratorId)
+        {
+            return this.repository.RemoveCollaborator(collaboratorId);
+        }
     }
 }

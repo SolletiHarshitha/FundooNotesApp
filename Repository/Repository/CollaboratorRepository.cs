@@ -74,5 +74,30 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Remove Collaborator Method
+        /// </summary>
+        /// <param name="collaboratorId">The Parameter</param>
+        /// <returns>Boolean Value</returns>
+        public bool RemoveCollaborator(int collaboratorId)
+        {
+            try
+            {
+                var collaborator = this.userContext.Collaborator.Find(collaboratorId);
+                if (collaborator != null)
+                {
+                    this.userContext.Collaborator.Remove(collaborator);
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

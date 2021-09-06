@@ -77,7 +77,34 @@ namespace FundooNotes.Controllers
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Collaborator doesn't added" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Failed to Get Collaborator" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// RemoveCollaborator API
+        /// </summary>
+        /// <param name="collaboratorId">The Parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpDelete]
+        [Route("api/RemoveCollaborator")]
+        public IActionResult RemoveCollaborator(int collaboratorId)
+        {
+            try
+            {
+                bool result = this.manager.RemoveCollaborator(collaboratorId);
+                if (result)
+                {
+                    return this.Ok(new { Status = true, Message = "Collaborator removed" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Collaborator doesn't removed" });
                 }
             }
             catch (Exception ex)
