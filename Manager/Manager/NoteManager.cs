@@ -36,7 +36,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="noteData">Data to add note</param>
         /// <returns>Result of the action</returns>
-        public string AddNote(NotesModel noteData)
+        public bool AddNote(NotesModel noteData)
         {
             return this.repository.AddNote(noteData);
         }
@@ -46,7 +46,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="noteData">To Update note</param>
         /// <returns>Result of the action</returns>
-        public string UpdateNote(NotesModel noteData)
+        public bool UpdateNote(NotesModel noteData)
         {
             return this.repository.UpdateNote(noteData);
         }
@@ -56,7 +56,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="id">To Delete Note</param>
         /// <returns>Result of the action</returns>
-        public string DeleteNoteMoveToTrash(int id)
+        public bool DeleteNoteMoveToTrash(int id)
         {
             return this.repository.DeleteNoteMoveToTrash(id);
         }
@@ -66,7 +66,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="id">Delete Note Forever</param>
         /// <returns>Result of the action</returns>
-        public string DeleteNoteForever(int id)
+        public bool DeleteNoteForever(int id)
         {
             return this.repository.DeleteNoteForever(id);
         }
@@ -76,7 +76,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="noteId">Data to archive</param>
         /// <returns>Result of the action</returns>
-        public string ArchiveNote(int noteId)
+        public bool ArchiveNote(int noteId)
         {
             return this.repository.ArchiveNote(noteId);
         }
@@ -86,7 +86,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="noteId">Data to UnArchive</param>
         /// <returns>Result of the action</returns>
-        public string UnArchiveNote(int noteId)
+        public bool UnArchiveNote(int noteId)
         {
             return this.repository.UnArchiveNote(noteId);
         }
@@ -96,7 +96,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="noteId">Pin Data</param>
         /// <returns>Result of the action</returns>
-        public string PinNote(int noteId)
+        public bool PinNote(int noteId)
         {
             return this.repository.PinNote(noteId);
         }
@@ -106,7 +106,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="noteId">UnPin Data</param>
         /// <returns>Result of the action</returns>
-        public string UnPinNote(int noteId)
+        public bool UnPinNote(int noteId)
         {
             return this.repository.UnPinNote(noteId);
         }
@@ -117,7 +117,7 @@ namespace Manager.Manager
         /// <param name="noteId">Note Id Parameter</param>
         /// <param name="color">Color Parameter</param>
         /// <returns>Result of the action</returns>
-        public string GetColor(int noteId, string color)
+        public bool GetColor(int noteId, string color)
         {
             return this.repository.GetColor(noteId, color);
         }
@@ -127,7 +127,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="noteId">Note Id Parameter</param>
         /// <returns>Result of the action</returns>
-        public string RestoreNote(int noteId)
+        public bool RestoreNote(int noteId)
         {
             return this.repository.RestoreNote(noteId);
         }
@@ -138,7 +138,7 @@ namespace Manager.Manager
         /// <param name="noteId">Note Id Parameter</param>
         /// <param name="reminder">Reminder Parameter</param>
         /// <returns>Result of the method</returns>
-        public string RemindMe(int noteId, string reminder)
+        public bool RemindMe(int noteId, string reminder)
         {
             return this.repository.RemindMe(noteId, reminder);
         }
@@ -148,7 +148,7 @@ namespace Manager.Manager
         /// </summary>
         /// <param name="noteId">Note Id Parameter</param>
         /// <returns>Result of the method</returns>
-        public string DeleteReminder(int noteId)
+        public bool DeleteReminder(int noteId)
         {
             return this.repository.DeleteReminder(noteId);
         }
