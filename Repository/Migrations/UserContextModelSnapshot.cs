@@ -53,10 +53,10 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NoteId")
+                    b.Property<int?>("NoteId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("LabelId");
@@ -150,13 +150,13 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Models.NotesModel", "NotesModel")
                         .WithMany()
-                        .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("NoteId");
 
                     b.HasOne("Models.RegisterModel", "RegisterModel")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Models.NotesModel", b =>

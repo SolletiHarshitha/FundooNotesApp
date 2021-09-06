@@ -10,7 +10,7 @@ using Repository.Context;
 namespace Repository.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20210906160606_Label")]
+    [Migration("20210906192401_Label")]
     partial class Label
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,10 +55,10 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NoteId")
+                    b.Property<int?>("NoteId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("LabelId");
@@ -152,13 +152,13 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Models.NotesModel", "NotesModel")
                         .WithMany()
-                        .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("NoteId");
 
                     b.HasOne("Models.RegisterModel", "RegisterModel")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Models.NotesModel", b =>

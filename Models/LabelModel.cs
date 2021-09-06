@@ -34,7 +34,7 @@ namespace Models
         /// Gets or sets note id
         /// </summary>
         [ForeignKey("NotesModel")]
-        public int NoteId { get; set; }
+        public int? NoteId { get; set; }
 
         /// <summary>
         /// Gets or sets notes model
@@ -45,7 +45,7 @@ namespace Models
         /// Gets or sets user id
         /// </summary>
         [ForeignKey("RegisterModel")]
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// Gets or sets register model
