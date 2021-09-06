@@ -28,5 +28,12 @@ namespace Manager.Interface
         /// <param name="noteId">The Parameter</param>
         /// <returns>Result of Boolean Method</returns>
         public List<CollaboratorModel> GetCollaborator(int noteId);
+
+        /// <summary>
+        /// Remove Collaborator
+        /// </summary>
+        /// <param name="collaboratorId">The Parameter</param>
+        /// <returns>Result of Boolean Method</returns>
+        bool RemoveCollaborator(int collaboratorId);
     }
 }
