@@ -37,5 +37,10 @@ namespace Repository.Context
         /// Gets or sets the collaborator table
         /// </summary>
         public DbSet<CollaboratorModel> Collaborator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the label table
+        /// </summary>
+        public DbSet<LabelModel> Label { get; set; }
     }
 }
