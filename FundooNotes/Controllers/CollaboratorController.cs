@@ -1,0 +1,61 @@
+﻿// ----------------------------------------------------------------------------------------------------------
+// <copyright file="CollaboratorController.cs" company="Bridgelabz"> 
+// Copyright © 2021 Company="BridgeLabz" 
+// </copyright> 
+// <creator name="Harshitha Solleti"/> 
+// ----------------------------------------------------------------------------------------------------------
+
+namespace FundooNotes.Controllers
+{
+    using System;
+    using Manager.Interface;
+    using Microsoft.AspNetCore.Mvc;
+    using Models;
+
+    /// <summary>
+    /// CollaboratorController Class
+    /// </summary>
+    public class CollaboratorController : ControllerBase
+    {
+        /// <summary>
+        /// object for ICollaborator Manager
+        /// </summary>
+        private readonly ICollaboratorManager manager;
+
+        /// <summary>
+        /// Initializes a new instance of the CollaboratorController class
+        /// </summary>
+        /// <param name="manager">The Parameter</param>
+        public CollaboratorController(ICollaboratorManager manager)
+        {
+            this.manager = manager;
+        }
+
+        /// <summary>
+        /// Add Collaborator API
+        /// </summary>
+        /// <param name="collaborator">The Parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpPost]
+        [Route("api/AddCollaborator")]
+        public IActionResult AddCollaborator([FromBody] CollaboratorModel collaborator)
+        {
+            try
+            {
+                bool result = this.manager.AddCollaborator(collaborator);
+                if (result)
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Collaborator Added Successful" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Collaborator doesn't added to the note" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+    }
+}
