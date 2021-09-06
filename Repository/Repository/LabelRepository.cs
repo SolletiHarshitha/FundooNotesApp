@@ -56,5 +56,30 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Remove Label Method
+        /// </summary>
+        /// <param name="labelId">The Parameter</param>
+        /// <returns>Return Boolean Value</returns>
+        public bool RemoveLabel(int labelId)
+        {
+            try
+            {
+                var label = this.userContext.Label.Find(labelId);
+                if (label != null)
+                {
+                    this.userContext.Label.Remove(label);
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

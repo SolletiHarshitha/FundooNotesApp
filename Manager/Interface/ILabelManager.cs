@@ -20,5 +20,12 @@ namespace Manager.Interface
         /// <param name="labelModel">The Parameter</param>
         /// <returns>Boolean Value</returns>
         bool CreateLabel(LabelModel labelModel);
+
+        /// <summary>
+        /// Remove Label Method
+        /// </summary>
+        /// <param name="labelId">The Parameter</param>
+        /// <returns>Boolean Value</returns>
+        bool RemoveLabel(int labelId);
     }
 }

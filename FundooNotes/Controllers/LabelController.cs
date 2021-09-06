@@ -37,7 +37,7 @@ namespace FundooNotes.Controllers
         /// <param name="labelModel">The Parameter</param>
         /// <returns>Result of the action</returns>
         [HttpPost]
-        [Route("api/AddLabel")]
+        [Route("api/CreateLabel")]
         public IActionResult CreateLabel([FromBody]LabelModel labelModel)
         {
             try
@@ -45,11 +45,38 @@ namespace FundooNotes.Controllers
                 bool result = this.manager.CreateLabel(labelModel);
                 if (result)
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Collaborator added Successfully!" });
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Label added Successfully!" });
                 }
                 else
                 {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Collaborator doesn't added" });
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Failed to add Label" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Remove Label API
+        /// </summary>
+        /// <param name="labelId">The Parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpDelete]
+        [Route("api/RemoveLabel")]
+        public IActionResult RemoveLabel(int labelId)
+        {
+            try
+            {
+                bool result = this.manager.RemoveLabel(labelId);
+                if (result)
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Label removed" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Failed to remove label" });
                 }
             }
             catch (Exception ex)
