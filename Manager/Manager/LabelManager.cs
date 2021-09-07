@@ -7,6 +7,7 @@
 
 namespace Manager.Manager
 {
+    using System.Collections.Generic;
     using global::Manager.Interface;
     using Models;
     using Repository.Interface;
@@ -59,6 +60,16 @@ namespace Manager.Manager
         public bool DeleteLabel(int userId, string labelName)
         {
             return this.repository.DeleteLabel(userId, labelName);
+        }
+
+        /// <summary>
+        /// Get Label By User Id
+        /// </summary>
+        /// <param name="userId">The Parameter</param>
+        /// <returns>Result the list</returns>
+        public List<LabelModel> GetLabelByUserId(int userId)
+        {
+            return this.repository.GetLabelByUserId(userId);
         }
     }
 }

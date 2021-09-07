@@ -8,11 +8,12 @@
 namespace Repository.Repository
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Models;
     using global::Repository.Context;
     using global::Repository.Interface;
-    
+
     /// <summary>
     /// Label Repository class
     /// </summary>
@@ -102,6 +103,24 @@ namespace Repository.Repository
                 }
 
                 return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get Label by User id
+        /// </summary>
+        /// <param name="userId">The Parameter</param>
+        /// <returns>List of labels</returns>
+        public List<LabelModel> GetLabelByUserId(int userId)
+        {
+            try
+            {
+                var label = this.userContext.Label.Where(x => x.UserId == userId).ToList();
+                return label;
             }
             catch (Exception ex)
             {

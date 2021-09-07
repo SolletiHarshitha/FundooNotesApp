@@ -7,6 +7,7 @@
 
 namespace Manager.Interface
 {
+    using System.Collections.Generic;
     using Models;
 
     /// <summary>
@@ -35,5 +36,12 @@ namespace Manager.Interface
         /// <param name="labelName">Label Name Parameter</param>
         /// <returns>Boolean Value</returns>
         bool DeleteLabel(int userId, string labelName);
+
+        /// <summary>
+        /// Get Label By User Id
+        /// </summary>
+        /// <param name="userId">The Parameter</param>
+        /// <returns>List of labels</returns>
+        public List<LabelModel> GetLabelByUserId(int userId);
     }
 }
