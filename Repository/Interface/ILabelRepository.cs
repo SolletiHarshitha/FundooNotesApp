@@ -27,5 +27,13 @@ namespace Repository.Interface
         /// <param name="labelId">The Parameter</param>
         /// <returns>Boolean Value</returns>
         bool RemoveLabel(int labelId);
+
+        /// <summary>
+        /// Delete Label
+        /// </summary>
+        /// <param name="userId">User Id Parameter</param>
+        /// <param name="labelName">Label Name Parameter</param>
+        /// <returns>Boolean Value</returns>
+        bool DeleteLabel(int userId, string labelName);
     }
 }
