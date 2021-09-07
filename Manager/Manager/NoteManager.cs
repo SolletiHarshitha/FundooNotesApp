@@ -9,6 +9,7 @@ namespace Manager.Manager
 {
     using System.Collections.Generic;
     using global::Manager.Interface;
+    using Microsoft.AspNetCore.Http;
     using Models;
     using Repository.Interface;
 
@@ -201,6 +202,17 @@ namespace Manager.Manager
         public List<NotesModel> GetNotes(int userId)
         {
             return this.repository.GetNotes(userId);
+        }
+
+        /// <summary>
+        /// Add Image
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="image">Image Parameter</param>
+        /// <returns>Result of the action</returns>
+        public bool AddImage(int noteId, IFormFile image)
+        {
+            return this.repository.AddImage(noteId, image);
         }
     }
 }

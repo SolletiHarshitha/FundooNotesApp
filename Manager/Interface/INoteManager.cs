@@ -8,6 +8,7 @@
 namespace Manager.Interface
 {
     using System.Collections.Generic;
+    using Microsoft.AspNetCore.Http;
     using Models;
 
     /// <summary>
@@ -135,5 +136,13 @@ namespace Manager.Interface
         /// <param name="userId">User Id Parameter</param>
         /// <returns>Result of the action</returns>
         public List<NotesModel> GetNotes(int userId);
+
+        /// <summary>
+        /// Add Image
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="image">The Parameter</param>
+        /// <returns>Result of the Method</returns>
+        bool AddImage(int noteId, IFormFile image);
     }
 }

@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.15.2" />
     <PackageReference Include="Experimental.System.Messaging" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
@@ -19,6 +21,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.12.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.2.50" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.12.2" />
   </ItemGroup>
 
@@ -28,8 +31,8 @@
 
   <ItemGroup>
     <Compile Update="Repository\NoteRepository.cs">
-      <ExcludeFromSourceAnalysis>True</ExcludeFromSourceAnalysis>
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+      <ExcludeFromSourceAnalysis>False</ExcludeFromSourceAnalysis>
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Update="Repository\UserRepository.cs">
       <ExcludeFromSourceAnalysis>True</ExcludeFromSourceAnalysis>

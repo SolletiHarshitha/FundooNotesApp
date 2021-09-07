@@ -10,10 +10,14 @@ namespace Repository.Repository
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Configuration;
     using Models;
     using global::Repository.Context;
     using global::Repository.Interface;
-    
+
     /// <summary>
     /// Note Repository class
     /// </summary>
@@ -25,12 +29,19 @@ namespace Repository.Repository
         private readonly UserContext userContext;
 
         /// <summary>
+        /// IConfiguration configuration
+        /// </summary>
+        private readonly IConfiguration config;
+
+        /// <summary>
         /// Initializes a new instance of the NoteRepository class
         /// </summary>
         /// <param name="userContext">UserContext userContext</param>
-        public NoteRepository(UserContext userContext)
+        /// <param name="configuration">IConfiguration configuration</param>
+        public NoteRepository(UserContext userContext, IConfiguration configuration)
         {
             this.userContext = userContext;
+            this.config = configuration;
         }
 
         /// <summary>
@@ -448,6 +459,42 @@ namespace Repository.Repository
             {
                 var notes = this.userContext.Notes.Where(x => x.UserId == userId && x.Trash == false && x.Archive == false).ToList();
                 return notes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Add Image
+        /// </summary>
+        /// <param name="noteId">note id Parameter</param>
+        /// <param name="image">The Parameter</param>
+        /// <returns>Result of the method</returns>
+        public bool AddImage(int noteId, IFormFile image)
+        {
+            try 
+            {
+                Account account = new Account("dghxlt009", "651423643215437","u756xpLyy5oYLhQ5861HHafriTs");
+                Cloudinary cloudinary = new Cloudinary(account);
+                var stream = image.OpenReadStream();
+                var uploadParams = new ImageUploadParams()
+                {
+                    File = new FileDescription(Guid.NewGuid().ToString(), stream),
+                };
+                var uploadResult = cloudinary.Upload(uploadParams);
+                var path = uploadResult.Url;
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Image = path.ToString();
+                    this.userContext.Notes.Update(note);
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
             }
             catch (Exception ex)
             {
