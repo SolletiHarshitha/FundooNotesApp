@@ -152,5 +152,23 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Get Label By Note Id
+        /// </summary>
+        /// <param name="noteId">The Parameter</param>
+        /// <returns>List of labels</returns>
+        public List<LabelModel> GetLabelByNoteId(int noteId)
+        {
+            try
+            {
+                var label = this.userContext.Label.Where(x => x.NoteId == noteId).ToList();
+                return label;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
