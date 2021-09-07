@@ -8,6 +8,7 @@
 namespace FundooNotes.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using Manager.Interface;
     using Microsoft.AspNetCore.Mvc;
     using Models;
@@ -105,6 +106,33 @@ namespace FundooNotes.Controllers
                 else
                 {
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Failed to delete label" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Get Label API
+        /// </summary>
+        /// <param name="userId">The Parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpGet]
+        [Route("api/GetLabelByUserId")]
+        public IActionResult GetLabelByUserId(int userId)
+        {
+            try
+            {
+                List<LabelModel> result = this.manager.GetLabelByUserId(userId);
+                if (result.Count > 0)
+                {
+                    return this.Ok(new { Status = true, Message = "List of Labels", Data = result }); 
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Failed to retrieve list" });
                 }
             }
             catch (Exception ex)
