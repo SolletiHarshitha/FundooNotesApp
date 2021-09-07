@@ -49,5 +49,16 @@ namespace Manager.Manager
         {
             return this.repository.RemoveLabel(labelId);
         }
+
+        /// <summary>
+        /// Delete Label Method
+        /// </summary>
+        /// <param name="userId">User Id Parameter</param>
+        /// <param name="labelName">Label Name Parameter</param>
+        /// <returns>Result of the boolean</returns>
+        public bool DeleteLabel(int userId, string labelName)
+        {
+            return this.repository.DeleteLabel(userId, labelName);
+        }
     }
 }

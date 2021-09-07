@@ -82,5 +82,31 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+        
+        /// <summary>
+        /// Delete Label
+        /// </summary>
+        /// <param name="userId">User Id Parameter</param>
+        /// <param name="labelName">Label name parameter</param>
+        /// <returns>Return boolean Value</returns>
+        public bool DeleteLabel(int userId, string labelName)
+        {
+            try
+            {
+                var label = this.userContext.Label.Where(x => x.UserId == userId && x.LabelName == labelName).ToList();
+                if (label != null)
+                {
+                    this.userContext.Label.RemoveRange(label);
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
