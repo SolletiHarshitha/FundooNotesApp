@@ -43,5 +43,12 @@ namespace Manager.Interface
         /// <param name="userId">The Parameter</param>
         /// <returns>List of labels</returns>
         public List<LabelModel> GetLabelByUserId(int userId);
+
+        /// <summary>
+        /// Add label
+        /// </summary>
+        /// <param name="labelModel">The Parameter</param>
+        /// <returns>Boolean Value</returns>
+        bool AddLabel(LabelModel labelModel);
     }
 }

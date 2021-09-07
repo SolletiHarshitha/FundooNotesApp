@@ -71,5 +71,15 @@ namespace Manager.Manager
         {
             return this.repository.GetLabelByUserId(userId);
         }
+
+        /// <summary>
+        /// Add label
+        /// </summary>
+        /// <param name="labelModel">The Parameter</param>
+        /// <returns>result of the boolean method</returns>
+        public bool AddLabel(LabelModel labelModel)
+        {
+            return this.repository.AddLabel(labelModel);
+        }
     }
 }
