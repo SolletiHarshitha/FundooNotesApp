@@ -144,5 +144,12 @@ namespace Repository.Interface
         /// <param name="image">The Parameter</param>
         /// <returns>Result of the Method</returns>
         bool AddImage(int noteId, IFormFile image);
+
+        /// <summary>
+        /// Remove Image
+        /// </summary>
+        /// <param name="noteId">The Parameter</param>
+        /// <returns>Result of the method</returns>
+        bool RemoveImage(int noteId);
     }
 }

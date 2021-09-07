@@ -214,5 +214,15 @@ namespace Manager.Manager
         {
             return this.repository.AddImage(noteId, image);
         }
+
+        /// <summary>
+        /// Remove Image
+        /// </summary>
+        /// <param name="noteId">The Parameter</param>
+        /// <returns>Result of the method</returns>
+        public bool RemoveImage(int noteId)
+        {
+            return this.repository.RemoveImage(noteId);
+        }
     }
 }

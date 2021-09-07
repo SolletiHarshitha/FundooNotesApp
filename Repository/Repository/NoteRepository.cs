@@ -476,7 +476,7 @@ namespace Repository.Repository
         {
             try 
             {
-                Account account = new Account("dghxlt009", "651423643215437","u756xpLyy5oYLhQ5861HHafriTs");
+                Account account = new Account("dghxlt009", "651423643215437", "u756xpLyy5oYLhQ5861HHafriTs");
                 Cloudinary cloudinary = new Cloudinary(account);
                 var stream = image.OpenReadStream();
                 var uploadParams = new ImageUploadParams()
@@ -489,6 +489,32 @@ namespace Repository.Repository
                 if (note != null)
                 {
                     note.Image = path.ToString();
+                    this.userContext.Notes.Update(note);
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Remove Image
+        /// </summary>
+        /// <param name="noteId">The Parameter</param>
+        /// <returns>Result of the method</returns>
+        public bool RemoveImage(int noteId)
+        {
+            try 
+            {
+                var note = this.userContext.Notes.Where(x => x.NoteId == noteId && x.Image != null).SingleOrDefault();
+                if (note != null)
+                {
+                    note.Image = null;
                     this.userContext.Notes.Update(note);
                     this.userContext.SaveChanges();
                     return true;
