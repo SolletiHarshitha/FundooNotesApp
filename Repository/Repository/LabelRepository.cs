@@ -127,5 +127,30 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Add Label Method
+        /// </summary>
+        /// <param name="labelModel">The Parameter</param>
+        /// <returns>Result of the method</returns>
+        public bool AddLabel(LabelModel labelModel)
+        {
+            try
+            {
+                var label = this.userContext.Label.Where(x => x.UserId == labelModel.UserId && x.LabelName == labelModel.LabelName).SingleOrDefault();
+                if (label == null)
+                {
+                    this.userContext.Label.Add(labelModel);
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
