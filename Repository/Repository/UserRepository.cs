@@ -109,8 +109,15 @@ namespace Repository.Repository
             try
             {
                 string encodedPassword = this.EncryptPassword(loginData.Password);
-                var login = this.userContext.Users.Where(x => x.Email == loginData.Email && x.Password == encodedPassword).FirstOrDefault();
-                if (login != null)
+                var user = this.userContext.Users.Where(x => x.Email == loginData.Email && x.Password == encodedPassword).FirstOrDefault();
+                
+                ConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect("127.0.0.1:6379");
+                IDatabase database = connectionMultiplexer.GetDatabase();
+                database.StringSet(key: "FirstName", user.FirstName);
+                database.StringSet(key: "LastName", user.LastName);
+                database.StringSet(key: "UserId", user.UserId.ToString());
+
+                if (user != null)
                 {
                     return true;
                 }

@@ -24,12 +24,16 @@ namespace FundooNotes.Controllers
         /// </summary>
         private readonly IUserManager manager;
 
+        /// <summary>
+        /// ILogger logger
+        /// </summary>
         private readonly ILogger<UserController> _logger;
 
         /// <summary>
         /// Initializes a new instance of the UserController class
         /// </summary>
         /// <param name="manager"> IUserManager manager</param>
+        /// <param name="logger">ILogger logger</param>
         public UserController(IUserManager manager, ILogger<UserController> logger)
         {
             this.manager = manager;
@@ -47,23 +51,23 @@ namespace FundooNotes.Controllers
         {
             try
             {
-                _logger.LogInformation(userData.FirstName + " is trying to register");
+                this._logger.LogInformation(userData.FirstName + " is trying to register");
                 string expectedResult = "Registration Successful";
                 string actualResult = this.manager.Register(userData);
                 if (expectedResult.Equals(actualResult))
                 {
-                    _logger.LogInformation(userData.FirstName + " has successfully registered");
+                    this._logger.LogInformation(userData.FirstName + " has successfully registered");
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "New User Added Successful", Data = actualResult });
                 }
                 else
                 {
-                    _logger.LogInformation("Registration Unsuccessful");
+                    this._logger.LogInformation("Registration Unsuccessful");
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Registration Unsuccessful", Data = actualResult });
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(userData.FirstName + " got an exception");
+                this._logger.LogError(userData.FirstName + " got an exception");
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
@@ -83,6 +87,19 @@ namespace FundooNotes.Controllers
                 string resultMessage = this.manager.GenerateToken(loginData.Email);
                 if (result == true)
                 {
+                    ConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect("127.0.0.1:6379");
+                    IDatabase database = connectionMultiplexer.GetDatabase();
+                    string firstName = database.StringGet("FirstName");
+                    string lastName = database.StringGet("LastName");
+                    int userId = Convert.ToInt32(database.StringGet("UserId"));
+
+                    RegisterModel data = new RegisterModel
+                    {
+                        FirstName = firstName,
+                        LastName = lastName,
+                        UserId = userId
+                    };
+
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "Login Successfull", Data = resultMessage });
                 }
                 else
