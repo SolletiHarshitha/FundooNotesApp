@@ -81,5 +81,15 @@ namespace Manager.Manager
         {
             return this.repository.AddLabel(labelModel);
         }
+
+        /// <summary>
+        /// Get Label by Note Id
+        /// </summary>
+        /// <param name="noteId">The Parameter</param>
+        /// <returns>Result List</returns>
+        public List<LabelModel> GetLabelByNoteId(int noteId)
+        {
+            return this.repository.GetLabelByNoteId(noteId);
+        }
     }
 }
