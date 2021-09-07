@@ -20,6 +20,7 @@ namespace Repository.Repository
     using Models;
     using global::Repository.Context;
     using global::Repository.Interface;
+    using StackExchange.Redis;
 
     /// <summary>
     /// User Repository Class

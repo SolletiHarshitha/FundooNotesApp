@@ -12,6 +12,7 @@ namespace FundooNotes.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Models;
+    using StackExchange.Redis;
 
     /// <summary>
     /// User Controller Class

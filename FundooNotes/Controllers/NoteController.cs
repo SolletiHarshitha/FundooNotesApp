@@ -11,6 +11,7 @@ namespace FundooNotes.Controllers
     using System.Collections.Generic;
     using Manager.Interface;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Models;
 
@@ -487,6 +488,34 @@ namespace FundooNotes.Controllers
                 else
                 {
                     return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Unsuccessful!" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Add Image API
+        /// </summary>
+        /// <param name="noteId">Note Id Parameter</param>
+        /// <param name="image">Image Path</param>
+        /// <returns>Result of the action</returns>
+        [HttpPut]
+        [Route("api/AddImage")]
+        public IActionResult AddImage(int noteId, IFormFile image)
+        {
+            try
+            {
+                bool note = this.manager.AddImage(noteId, image);
+                if (note)
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Image added Successful" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Failed to add image" });
                 }
             }
             catch (Exception ex)
