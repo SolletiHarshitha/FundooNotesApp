@@ -57,5 +57,13 @@ namespace Manager.Interface
         /// <param name="noteId">The Parameter</param>
         /// <returns>List of labels</returns>
         public List<LabelModel> GetLabelByNoteId(int noteId);
+
+        /// <summary>
+        /// Rename label
+        /// </summary>
+        /// <param name="labelId">label id parameter</param>
+        /// <param name="labelName">label name parameter</param>
+        /// <returns>Boolean value</returns>
+        bool RenameLabel(int labelId, string labelName);
     }
 }
