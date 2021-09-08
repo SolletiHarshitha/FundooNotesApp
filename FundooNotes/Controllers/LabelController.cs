@@ -196,18 +196,17 @@ namespace FundooNotes.Controllers
         }
 
         /// <summary>
-        /// Rename Label API
+        /// Edit Label API
         /// </summary>
-        /// <param name="labelId">label id parameter</param>
-        /// <param name="labelName">label name parameter</param>
+        /// <param name="updateLabel">The Parameter</param>
         /// <returns>Result of the action</returns>
         [HttpPut]
-        [Route("api/RenameLabel")]
-        public IActionResult RenameLabel(int labelId, string labelName)
+        [Route("api/EditLabel")]
+        public IActionResult EditLabel(UpdateLabelModel updateLabel)
         {
             try
             {
-                bool result = this.manager.RenameLabel(labelId, labelName);
+                bool result = this.manager.EditLabel(updateLabel);
                 if (result)
                 {
                     return this.Ok(new ResponseModel<string>() { Status = true, Message = "Label updated Successfully!" });

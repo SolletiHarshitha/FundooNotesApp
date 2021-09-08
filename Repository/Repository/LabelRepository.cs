@@ -45,7 +45,7 @@ namespace Repository.Repository
                 var label = this.userContext.Label.Where(x => x.UserId == labelModel.UserId && x.LabelName == labelModel.LabelName).SingleOrDefault();
                 if (label == null)
                 {
-                    labelModel.NoteId = null;
+                    label.NoteId = null;
                     this.userContext.Label.Add(labelModel);
                     this.userContext.SaveChanges();
                     return true;
@@ -172,21 +172,24 @@ namespace Repository.Repository
         }
 
         /// <summary>
-        /// Rename Label
+        /// Edit Label
         /// </summary>
-        /// <param name="labelId">Label id Parameter</param>
-        /// <param name="labelName">Label name parameter</param>
+        /// <param name="updateLabel">The Parameter</param>
         /// <returns>Result of the method</returns>
-        public bool RenameLabel(int labelId, string labelName)
+        public bool EditLabel(UpdateLabelModel updateLabel)
         {
             try 
             {
-                var label = this.userContext.Label.Find(labelId);
+                var label = this.userContext.Label.Where(x => x.UserId == updateLabel.UserId && x.LabelName == updateLabel.LabelName).ToList();
                 if (label != null)
                 {
-                    label.LabelName = labelName;
-                    this.userContext.Label.Update(label);
-                    this.userContext.SaveChanges();
+                    foreach (var l in label)
+                    {
+                        l.LabelName = updateLabel.NewLabelName;
+                        this.userContext.Label.Update(l);
+                        this.userContext.SaveChanges();
+                    }
+
                     return true;
                 }
 
