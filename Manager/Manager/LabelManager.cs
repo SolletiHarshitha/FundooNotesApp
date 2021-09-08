@@ -91,5 +91,16 @@ namespace Manager.Manager
         {
             return this.repository.GetLabelByNoteId(noteId);
         }
+
+        /// <summary>
+        /// Rename Label
+        /// </summary>
+        /// <param name="labelId">label id parameter</param>
+        /// <param name="labelName">label name parameter</param>
+        /// <returns>Boolean value of the method</returns>
+        public bool RenameLabel(int labelId, string labelName)
+        {
+            return this.repository.RenameLabel(labelId, labelName);
+        }
     }
 }

@@ -194,5 +194,33 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Rename Label API
+        /// </summary>
+        /// <param name="labelId">label id parameter</param>
+        /// <param name="labelName">label name parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpPut]
+        [Route("api/RenameLabel")]
+        public IActionResult RenameLabel(int labelId, string labelName)
+        {
+            try
+            {
+                bool result = this.manager.RenameLabel(labelId, labelName);
+                if (result)
+                {
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Label updated Successfully!" });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Failed to update label" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }

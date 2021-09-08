@@ -170,5 +170,32 @@ namespace Repository.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Rename Label
+        /// </summary>
+        /// <param name="labelId">Label id Parameter</param>
+        /// <param name="labelName">Label name parameter</param>
+        /// <returns>Result of the method</returns>
+        public bool RenameLabel(int labelId, string labelName)
+        {
+            try 
+            {
+                var label = this.userContext.Label.Find(labelId);
+                if (label != null)
+                {
+                    label.LabelName = labelName;
+                    this.userContext.Label.Update(label);
+                    this.userContext.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
