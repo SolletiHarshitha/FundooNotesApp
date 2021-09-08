@@ -93,14 +93,13 @@ namespace Manager.Manager
         }
 
         /// <summary>
-        /// Rename Label
+        /// Edit Label
         /// </summary>
-        /// <param name="labelId">label id parameter</param>
-        /// <param name="labelName">label name parameter</param>
-        /// <returns>Boolean value of the method</returns>
-        public bool RenameLabel(int labelId, string labelName)
+        /// <param name="updateLabel">The Parameter</param>
+        /// <returns>Result of the boolean method</returns>
+        public bool EditLabel(UpdateLabelModel updateLabel)
         {
-            return this.repository.RenameLabel(labelId, labelName);
+            return this.repository.EditLabel(updateLabel);
         }
     }
 }
