@@ -37,6 +37,10 @@ namespace FundooNotes
             services.AddDbContextPool<UserContext>(
                 options => options.UseSqlServer(this.Configuration.GetConnectionString("UserDbConnection")));
 
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(2);
+            });
+
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();
 
@@ -119,6 +123,8 @@ namespace FundooNotes
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
