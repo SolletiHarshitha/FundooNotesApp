@@ -9,6 +9,7 @@ namespace FundooNotes.Controllers
 {
     using System;
     using Manager.Interface;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Models;
@@ -28,6 +29,7 @@ namespace FundooNotes.Controllers
         /// ILogger logger
         /// </summary>
         private readonly ILogger<UserController> _logger;
+        const string SessionEmail = "Email";
 
         /// <summary>
         /// Initializes a new instance of the UserController class
@@ -151,10 +153,12 @@ namespace FundooNotes.Controllers
         {
             try 
             {
+                HttpContext.Session.SetString(SessionEmail, resetData.Email);
                 bool result = this.manager.ResetPassword(resetData);
                 if (result == true)
                 {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Reset Password Successful!" });
+                    var email = HttpContext.Session.GetString(SessionEmail);
+                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Reset Password Successful!", Data = "SessionMail : "+ email });
                 }
                 else
                 {
