@@ -45,13 +45,6 @@ namespace Repository.Interface
         public List<LabelModel> GetLabelByUserId(int userId);
 
         /// <summary>
-        /// Add label
-        /// </summary>
-        /// <param name="labelModel">The Parameter</param>
-        /// <returns>Boolean Value</returns>
-        bool AddLabel(LabelModel labelModel);
-
-        /// <summary>
         /// Get Label By Note Id
         /// </summary>
         /// <param name="noteId">The Parameter</param>

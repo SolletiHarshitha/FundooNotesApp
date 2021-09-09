@@ -73,16 +73,6 @@ namespace Manager.Manager
         }
 
         /// <summary>
-        /// Add label
-        /// </summary>
-        /// <param name="labelModel">The Parameter</param>
-        /// <returns>result of the boolean method</returns>
-        public bool AddLabel(LabelModel labelModel)
-        {
-            return this.repository.AddLabel(labelModel);
-        }
-
-        /// <summary>
         /// Get Label by Note Id
         /// </summary>
         /// <param name="noteId">The Parameter</param>
