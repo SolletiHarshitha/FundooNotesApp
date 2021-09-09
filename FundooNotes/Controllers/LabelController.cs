@@ -142,33 +142,6 @@ namespace FundooNotes.Controllers
         }
 
         /// <summary>
-        /// Add Label API
-        /// </summary>
-        /// <param name="labelModel">The Parameter</param>
-        /// <returns>Result of the action</returns>
-        [HttpPost]
-        [Route("api/AddLabel")]
-        public IActionResult AddLabel([FromBody] LabelModel labelModel)
-        {
-            try
-            {
-                bool result = this.manager.AddLabel(labelModel);
-                if (result)
-                {
-                    return this.Ok(new ResponseModel<string>() { Status = true, Message = "Label added Successfully!" });
-                }
-                else
-                {
-                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Failed to add Label" });
-                }
-            }
-            catch (Exception ex)
-            {
-                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
-            }
-        }
-
-        /// <summary>
         /// Get Label By Note Id
         /// </summary>
         /// <param name="noteId">The Parameter</param>
