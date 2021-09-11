@@ -57,5 +57,13 @@ namespace Repository.Interface
         /// <param name="updateLabel">The Parameter</param>
         /// <returns>Boolean Value</returns>
         bool EditLabel(UpdateLabelModel updateLabel);
+
+        /// <summary>
+        /// Get Notes By Label
+        /// </summary>
+        /// <param name="userId">User Id Parameter</param>
+        /// <param name="labelName">Label Name Parameter</param>
+        /// <returns>Returns List</returns>
+        public List<LabelModel> GetNotesByLabel(int userId, string labelName);
     }
 }
