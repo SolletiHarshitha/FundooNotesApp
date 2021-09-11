@@ -194,5 +194,33 @@ namespace FundooNotes.Controllers
                 return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Get Note by label
+        /// </summary>
+        /// <param name="userId">User Id Parameter</param>
+        /// <param name="labelName">Label Name Parameter</param>
+        /// <returns>Result of the action</returns>
+        [HttpGet]
+        [Route("api/GetNoteByLabel")]
+        public IActionResult GetNotesByLabel(int userId, string labelName)
+        {
+            try
+            {
+                List<LabelModel> result = this.manager.GetNotesByLabel(userId, labelName);
+                if (result.Count > 0)
+                {
+                    return this.Ok(new { Status = true, Message = "List of Labels", Data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new ResponseModel<string>() { Status = false, Message = "Failed to retrieve list" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.NotFound(new ResponseModel<string>() { Status = false, Message = ex.Message });
+            }
+        }
     }
 }

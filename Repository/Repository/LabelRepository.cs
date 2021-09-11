@@ -154,20 +154,39 @@ namespace Repository.Repository
         {
             try 
             {
-                var label = this.userContext.Label.Where(x => x.UserId == updateLabel.UserId && x.LabelName == updateLabel.LabelName).ToList();
-                if (label != null)
+                var editLabel = this.userContext.Label.Where(x => x.UserId == updateLabel.UserId && x.LabelName == updateLabel.LabelName).ToList();
+                if (editLabel != null)
                 {
-                    foreach (var l in label)
+                    foreach (var label in editLabel)
                     {
-                        l.LabelName = updateLabel.NewLabelName;
-                        this.userContext.Label.Update(l);
-                        this.userContext.SaveChanges();
+                        label.LabelName = updateLabel.NewLabelName;
+                        this.userContext.Label.Update(label); 
                     }
 
+                    this.userContext.SaveChanges();
                     return true;
                 }
 
                 return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get Notes By Label
+        /// </summary>
+        /// <param name="userId">User Id Parameter</param>
+        /// <param name="labelName">Label Name Parameter</param>
+        /// <returns>Returns List</returns>
+        public List<LabelModel> GetNotesByLabel(int userId, string labelName)
+        {
+            try 
+            {
+                var result = this.userContext.Label.Where(x => x.UserId == userId && x.LabelName == labelName).ToList();
+                return result;
             }
             catch (Exception ex)
             {
